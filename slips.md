@@ -4,7 +4,7 @@ This document lists the content currently configured in the receipt printer appl
 
 
 **Title:** Retention  
-**Phone:** 0151 288 6727  
+**Phone:** 0151 934 2858
 **Email:** retention@sefton.gov.uk
 
 ---

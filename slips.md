@@ -31,12 +31,6 @@ This document lists the content currently configured in the receipt printer appl
 
 ---
 
-**Title:** Swim Times  
-**General Swim:** 09:00 - 11:30  
-**Lane Swim:** 12:00 - 14:00
-
----
-
 **Title:** Gym Times  
 **Mon - Fri:** 06:30 - 22:00  
 **Sat - Sun:** 08:00 - 17:00

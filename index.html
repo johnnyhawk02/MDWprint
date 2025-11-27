@@ -24,7 +24,8 @@
             background: #ffffff;
             padding: 12px 20px;
             display: flex;
-            justify-content: space-between; /* Space out items */
+            justify-content: flex-start; /* Aligns items to the left */
+            gap: 24px; /* Space between button and checkbox */
             align-items: center;
             border-bottom: 1px solid #cbd5e1;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
@@ -103,7 +104,7 @@
             font-weight: 500;
             color: #334155;
             user-select: none;
-            margin-left: auto; /* Push to right */
+            margin-left: 0; /* Removed margin-left: auto to keep it next to button */
         }
         
         input[type="checkbox"] {

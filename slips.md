@@ -37,7 +37,7 @@ This document lists the content currently configured in the receipt printer appl
 
 ---
 
-**Title:** Gym Opening Times  
+**Title:** Gym Times  
 **Mon - Fri:** 06:30 - 22:00  
 **Sat - Sun:** 08:00 - 17:00
 

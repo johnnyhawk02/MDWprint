@@ -24,14 +24,61 @@
             background: #ffffff;
             padding: 12px 20px;
             display: flex;
-            gap: 20px;
+            justify-content: space-between; /* Space out items */
+            align-items: center;
             border-bottom: 1px solid #cbd5e1;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             flex-shrink: 0;
-            align-items: center;
+            z-index: 10;
         }
 
-        button {
+        /* MAIN LAYOUT */
+        #main-container {
+            display: flex;
+            flex-grow: 1;
+            overflow: hidden; /* Prevent body scroll */
+        }
+
+        /* SIDEBAR */
+        #sidebar {
+            width: 260px;
+            background: #ffffff;
+            border-right: 1px solid #cbd5e1;
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+            gap: 8px;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .sidebar-btn {
+            background: #f1f5f9;
+            color: #334155;
+            border: 1px solid transparent;
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .sidebar-btn:hover {
+            background: #e2e8f0;
+            color: #0f172a;
+        }
+
+        .sidebar-btn.active {
+            background: #0f172a;
+            color: white;
+            border-color: #0f172a;
+        }
+
+        /* BUTTONS & INPUTS */
+        #btn-print {
             background: #0f172a; /* Slate 900 */
             color: white;
             border: none;
@@ -45,21 +92,8 @@
             align-items: center;
             gap: 8px;
         }
-        button:hover { background: #334155; }
-        button:active { background: #000000; transform: translateY(1px); }
-
-        select {
-            padding: 10px 16px;
-            font-size: 16px;
-            border-radius: 6px;
-            border: 1px solid #cbd5e1;
-            background-color: #f8fafc;
-            cursor: pointer;
-            font-weight: 500;
-            color: #334155;
-            outline: none;
-        }
-        select:hover { border-color: #94a3b8; }
+        #btn-print:hover { background: #334155; }
+        #btn-print:active { background: #000000; transform: translateY(1px); }
 
         .checkbox-label {
             display: flex;
@@ -69,6 +103,7 @@
             font-weight: 500;
             color: #334155;
             user-select: none;
+            margin-left: auto; /* Push to right */
         }
         
         input[type="checkbox"] {
@@ -85,13 +120,14 @@
             justify-content: center;
             padding: 40px 20px;
             overflow-y: auto;
+            background-color: #e2e8f0;
         }
 
         /* EDITOR */
         #editor {
             background: white;
             color: black;
-            width: 320px; /* Slightly wider */
+            width: 320px; 
             min-height: 400px;
             padding: 24px 16px;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -114,25 +150,23 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
             PRINT
         </button>
-        <select id="template-select">
-            <option value="" disabled selected>Select Slip...</option>
-            <option value="Aquatics">Aquatics</option>
-            <option value="FemaleChange">Female Change</option>
-            <option value="GymOpeningTimes">Gym Opening Times</option>
-            <option value="MaleChange">Male Change</option>
-            <option value="Retention">Retention</option>
-            <option value="Rhymetime">Rhymetime</option>
-            <option value="SaunaSteam">Sauna & Steam</option>
-            <option value="SwimTimes">Swim Times</option>
-        </select>
+        
         <label class="checkbox-label">
             <input type="checkbox" id="chk-multicopy">
             10x Copies
         </label>
     </div>
 
-    <div id="workspace">
-        <div id="editor" contenteditable="true"></div>
+    <div id="main-container">
+        <!-- SIDEBAR for Templates -->
+        <div id="sidebar">
+            <!-- Buttons injected by JS -->
+        </div>
+
+        <!-- EDITOR AREA -->
+        <div id="workspace">
+            <div id="editor" contenteditable="true"></div>
+        </div>
     </div>
 
     <script>
@@ -148,15 +182,23 @@
                 <p style="font-size: 32px; font-weight: bold;">1350</p>
             `,
             GymOpeningTimes: `
-                <p style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">Gym Opening Times</p>
-                <p style="font-size: 16px; font-weight: 600;">Mon - Fri</p>
-                <p style="font-size: 18px; margin-bottom: 8px;">06:30 - 22:00</p>
-                <p style="font-size: 16px; font-weight: 600;">Sat - Sun</p>
-                <p style="font-size: 18px;">08:00 - 17:00</p>
+                <p style="font-size: 24px; font-weight: bold; margin-bottom: 12px;">Gym Opening Times</p>
+                <div style="display: flex; justify-content: space-between; padding: 0 10px; font-size: 16px; margin-bottom: 4px;">
+                    <span style="font-weight: 600;">Mon - Fri</span>
+                    <span>06:30 - 22:00</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 0 10px; font-size: 16px;">
+                    <span style="font-weight: 600;">Sat - Sun</span>
+                    <span>08:00 - 17:00</span>
+                </div>
             `,
             MaleChange: `
                 <p style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">Male Change</p>
                 <p style="font-size: 32px; font-weight: bold;">1450</p>
+            `,
+            Printouts: `
+                <p style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">Printouts</p>
+                <p style="font-size: 20px;">mdwprint.netlify.app</p>
             `,
             Retention: `
                 <p style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">Retention</p>
@@ -164,45 +206,83 @@
                 <p style="font-size: 20px;">retention@sefton.gov.uk</p>
             `,
             Rhymetime: `
-                <p style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">Rhymetime</p>
-                <p style="font-size: 16px; font-weight: 600;">Tue</p>
-                <p style="font-size: 18px; margin-bottom: 8px;">10:30 and 14:00</p>
-                <p style="font-size: 16px; font-weight: 600;">Fri</p>
-                <p style="font-size: 18px;">10:30</p>
+                <p style="font-size: 24px; font-weight: bold; margin-bottom: 12px;">Rhymetime</p>
+                <div style="display: flex; justify-content: space-between; padding: 0 10px; font-size: 16px; margin-bottom: 4px;">
+                    <span style="font-weight: 600;">Tue</span>
+                    <span>10:30 and 14:00</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 0 10px; font-size: 16px;">
+                    <span style="font-weight: 600;">Fri</span>
+                    <span>10:30</span>
+                </div>
             `,
             SaunaSteam: `
                 <p style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">Sauna & Steam</p>
                 <p style="font-size: 32px; font-weight: bold;">1580</p>
             `,
             SwimTimes: `
-                <p style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">Swim Times</p>
-                <p style="font-size: 16px; font-weight: 600;">General Swim</p>
-                <p style="font-size: 18px; margin-bottom: 8px;">09:00 - 11:30</p>
-                <p style="font-size: 16px; font-weight: 600;">Lane Swim</p>
-                <p style="font-size: 18px;">12:00 - 14:00</p>
+                <p style="font-size: 24px; font-weight: bold; margin-bottom: 12px;">Swim Times</p>
+                <div style="display: flex; justify-content: space-between; padding: 0 10px; font-size: 16px; margin-bottom: 4px;">
+                    <span style="font-weight: 600;">General Swim</span>
+                    <span>09:00 - 11:30</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 0 10px; font-size: 16px;">
+                    <span style="font-weight: 600;">Lane Swim</span>
+                    <span>12:00 - 14:00</span>
+                </div>
             `
         };
 
         // --- DOM ELEMENTS ---
         const editor = document.getElementById('editor');
         const btnPrint = document.getElementById('btn-print');
-        const selector = document.getElementById('template-select');
+        const sidebar = document.getElementById('sidebar');
         const chkMulti = document.getElementById('chk-multicopy');
 
         // --- FUNCTIONS ---
 
+        function formatLabel(key) {
+            // Add spaces between camelCase words for display (e.g. GymOpeningTimes -> Gym Opening Times)
+            return key.replace(/([A-Z])/g, ' $1').trim();
+        }
+
         function loadTemplate(name) {
             if (TEMPLATES[name]) {
                 editor.innerHTML = TEMPLATES[name].trim();
-                selector.value = name;
+                
+                // Update active state in sidebar
+                document.querySelectorAll('.sidebar-btn').forEach(btn => {
+                    if (btn.dataset.template === name) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
             }
+        }
+
+        function initSidebar() {
+            // Sort keys alphabetically
+            const keys = Object.keys(TEMPLATES).sort();
+            
+            keys.forEach(key => {
+                const btn = document.createElement('button');
+                btn.className = 'sidebar-btn';
+                // Handle special display names if needed, otherwise use formatted key
+                if (key === 'SaunaSteam') btn.textContent = 'Sauna & Steam';
+                else btn.textContent = formatLabel(key);
+                
+                btn.dataset.template = key;
+                btn.onclick = () => loadTemplate(key);
+                sidebar.appendChild(btn);
+            });
         }
 
         function handlePrint() {
             const rawContent = editor.innerHTML;
             const isMulti = chkMulti.checked;
-            // Increased size to 10px (~7.5pt) for visibility and added padding to prevent cutoff
-            const footer = '<p style="font-size: 10px; margin-top: 10px; padding-bottom: 5px;">-MDW-</p>';
+            // Updated size to 4px as requested
+            const footer = '<p style="font-size: 4px; margin-top: 10px; padding-bottom: 5px;">-MDW-</p>';
             
             let printContent = '';
 
@@ -249,7 +329,8 @@
                         p { margin: 0; padding: 2px 0; }
                         
                         .slip-container {
-                            padding: 0; 
+                            padding-left: 30px; /* Adjusted left spacing */
+                            padding-right: 30px; /* Adjusted right spacing */
                             padding-bottom: 10px;
                             /* ADDED: Top padding provides robust spacing that survives page breaks */
                             padding-top: 15px;
@@ -307,10 +388,10 @@
         }
 
         // --- INITIALIZATION ---
-        // Load default but don't force select box
+        initSidebar();
+        // Load default
         loadTemplate('Retention');
 
-        selector.addEventListener('change', (e) => loadTemplate(e.target.value));
         btnPrint.addEventListener('click', handlePrint);
         
     </script>

@@ -46,3 +46,8 @@ This document lists the content currently configured in the receipt printer appl
 **Title:** Rhymetime
 **Tue:** 10:30 and 14:00
 **Fri:** 10:30
+
+---
+
+**Title:** Printouts
+**URL:** mdwprint.netlify.app

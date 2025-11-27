@@ -116,13 +116,13 @@
         </button>
         <select id="template-select">
             <option value="" disabled selected>Select Slip...</option>
-            <option value="Retention">Retention</option>
             <option value="Aquatics">Aquatics</option>
-            <option value="MaleChange">Male Change</option>
             <option value="FemaleChange">Female Change</option>
+            <option value="GymOpeningTimes">Gym Opening Times</option>
+            <option value="MaleChange">Male Change</option>
+            <option value="Retention">Retention</option>
             <option value="SaunaSteam">Sauna & Steam</option>
             <option value="SwimTimes">Swim Times</option>
-            <option value="GymOpeningTimes">Gym Opening Times</option>
         </select>
         <label class="checkbox-label">
             <input type="checkbox" id="chk-multicopy">
@@ -137,23 +137,30 @@
     <script>
         // --- DATA ---
         const TEMPLATES = {
-            Retention: `
-                <p style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">Retention</p>
-                <p style="font-size: 18px; font-weight: 600;">0151 288 6727</p>
-                <p style="font-size: 20px;">retention@sefton.gov.uk</p>
-            `,
             Aquatics: `
                 <p style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">Aquatics</p>
                 <p style="font-size: 18px; font-weight: 600;">0151 934 2927</p>
                 <p style="font-size: 20px;">active.aquatics@sefton.gov.uk</p>
             `,
+            FemaleChange: `
+                <p style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">Female Change</p>
+                <p style="font-size: 32px; font-weight: bold;">1350</p>
+            `,
+            GymOpeningTimes: `
+                <p style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">Gym Opening Times</p>
+                <p style="font-size: 16px; font-weight: 600;">Mon - Fri</p>
+                <p style="font-size: 18px; margin-bottom: 8px;">06:30 - 22:00</p>
+                <p style="font-size: 16px; font-weight: 600;">Sat - Sun</p>
+                <p style="font-size: 18px;">08:00 - 17:00</p>
+            `,
             MaleChange: `
                 <p style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">Male Change</p>
                 <p style="font-size: 32px; font-weight: bold;">1450</p>
             `,
-            FemaleChange: `
-                <p style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">Female Change</p>
-                <p style="font-size: 32px; font-weight: bold;">1350</p>
+            Retention: `
+                <p style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">Retention</p>
+                <p style="font-size: 18px; font-weight: 600;">0151 288 6727</p>
+                <p style="font-size: 20px;">retention@sefton.gov.uk</p>
             `,
             SaunaSteam: `
                 <p style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">Sauna & Steam</p>
@@ -165,13 +172,6 @@
                 <p style="font-size: 18px; margin-bottom: 8px;">09:00 - 11:30</p>
                 <p style="font-size: 16px; font-weight: 600;">Lane Swim</p>
                 <p style="font-size: 18px;">12:00 - 14:00</p>
-            `,
-            GymOpeningTimes: `
-                <p style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">Gym Opening Times</p>
-                <p style="font-size: 16px; font-weight: 600;">Mon - Fri</p>
-                <p style="font-size: 18px; margin-bottom: 8px;">06:30 - 22:00</p>
-                <p style="font-size: 16px; font-weight: 600;">Sat - Sun</p>
-                <p style="font-size: 18px;">08:00 - 17:00</p>
             `
         };
 

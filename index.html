@@ -140,12 +140,12 @@
             Retention: `
                 <p style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">Retention</p>
                 <p style="font-size: 18px; font-weight: 600;">0151 288 6727</p>
-                <p style="font-size: 16px;">retention@sefton.gov.uk</p>
+                <p style="font-size: 20px; font-weight: 600;">retention@sefton.gov.uk</p>
             `,
             Aquatics: `
                 <p style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">Aquatics</p>
                 <p style="font-size: 18px; font-weight: 600;">0151 934 2927</p>
-                <p style="font-size: 16px;">active.aquatics@sefton.gov.uk</p>
+                <p style="font-size: 20px; font-weight: 600;">active.aquatics@sefton.gov.uk</p>
             `,
             MaleChange: `
                 <p style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">Male Change</p>
@@ -243,20 +243,31 @@
                         .slip-container {
                             padding: 0; 
                             padding-bottom: 10px;
+                            /* ADDED: Top padding provides robust spacing that survives page breaks */
+                            padding-top: 15px;
                             page-break-inside: avoid; 
                             margin-top: 0 !important;
                         }
 
-                        /* Kill margin on first element to prevent whitespace */
+                        /* KILL PADDING ON FIRST SLIP TO PREVENT TOP WHITESPACE */
+                        .slip-container:first-of-type {
+                            padding-top: 0 !important;
+                            margin-top: 0 !important;
+                        }
+
                         .slip-container > :first-child {
                             margin-top: 0 !important;
                             padding-top: 0 !important;
                         }
                         
                         .cut-line {
-                            margin: 15px auto;
+                            /* Changed from margin to padding for robust spacing */
+                            margin: 0;
+                            padding-top: 15px; 
                             width: 100%;
                             border-bottom: 1px dashed #000;
+                            height: 1px;
+                            box-sizing: content-box;
                         }
 
                         /* Hide things in print preview if necessary */

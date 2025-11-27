@@ -1,0 +1,5 @@
+{
+  "name": "MDWprint_one_page",
+  "description": "A lightweight, single-file receipt printing utility for printing text slips.",
+  "requestFramePermissions": []
+}

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slip Printer</title>
+    <style>
+        /* --- APP STYLES --- */
+        * { box-sizing: border-box; }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #e2e8f0; /* Modern Light Gray */
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* TOOLBAR */
+        #toolbar {
+            background: #ffffff;
+            padding: 12px 20px;
+            display: flex;
+            gap: 20px;
+            border-bottom: 1px solid #cbd5e1;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            flex-shrink: 0;
+            align-items: center;
+        }
+
+        button {
+            background: #0f172a; /* Slate 900 */
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        button:hover { background: #334155; }
+        button:active { background: #000000; transform: translateY(1px); }
+
+        select {
+            padding: 10px 16px;
+            font-size: 16px;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+            background-color: #f8fafc;
+            cursor: pointer;
+            font-weight: 500;
+            color: #334155;
+            outline: none;
+        }
+        select:hover { border-color: #94a3b8; }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #334155;
+            user-select: none;
+        }
+        
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #0f172a;
+        }
+
+        /* WORKSPACE */
+        #workspace {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+            overflow-y: auto;
+        }
+
+        /* EDITOR */
+        #editor {
+            background: white;
+            color: black;
+            width: 320px; /* Slightly wider */
+            min-height: 400px;
+            padding: 24px 16px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            outline: none;
+            text-align: center;
+            font-size: 16px;
+            line-height: 1.5;
+            height: fit-content; 
+            border-radius: 2px;
+        }
+
+        #editor p { margin: 0; padding: 1px 0; }
+    </style>
+</head>
+<body>
+
+    <div id="toolbar">
+        <button id="btn-print">
+            <!-- Simple SVG Printer Icon -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+            PRINT
+        </button>
+        <select id="template-select">
+            <option value="" disabled selected>Select Slip...</option>
+            <option value="Retention">Retention</option>
+            <option value="Aquatics">Aquatics</option>
+            <option value="MaleChange">Male Change</option>
+            <option value="FemaleChange">Female Change</option>
+            <option value="SaunaSteam">Sauna & Steam</option>
+            <option value="SwimTimes">Swim Times</option>
+            <option value="GymOpeningTimes">Gym Opening Times</option>
+        </select>
+        <label class="checkbox-label">
+            <input type="checkbox" id="chk-multicopy">
+            10x Copies
+        </label>
+    </div>
+
+    <div id="workspace">
+        <div id="editor" contenteditable="true"></div>
+    </div>
+
+    <script>
+        // --- DATA ---
+        const TEMPLATES = {
+            Retention: `
+                <p style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">Retention</p>
+                <p style="font-size: 18px; font-weight: 600;">0151 288 6727</p>
+                <p style="font-size: 16px;">retention@sefton.gov.uk</p>
+            `,
+            Aquatics: `
+                <p style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">Aquatics</p>
+                <p style="font-size: 18px; font-weight: 600;">0151 934 2927</p>
+                <p style="font-size: 16px;">active.aquatics@sefton.gov.uk</p>
+            `,
+            MaleChange: `
+                <p style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">Male Change</p>
+                <p style="font-size: 32px; font-weight: bold;">1450</p>
+            `,
+            FemaleChange: `
+                <p style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">Female Change</p>
+                <p style="font-size: 32px; font-weight: bold;">1350</p>
+            `,
+            SaunaSteam: `
+                <p style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">Sauna & Steam</p>
+                <p style="font-size: 32px; font-weight: bold;">1580</p>
+            `,
+            SwimTimes: `
+                <p style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">Swim Times</p>
+                <p style="font-size: 16px; font-weight: 600;">General Swim</p>
+                <p style="font-size: 18px; margin-bottom: 8px;">09:00 - 11:30</p>
+                <p style="font-size: 16px; font-weight: 600;">Lane Swim</p>
+                <p style="font-size: 18px;">12:00 - 14:00</p>
+            `,
+            GymOpeningTimes: `
+                <p style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">Gym Opening Times</p>
+                <p style="font-size: 16px; font-weight: 600;">Mon - Fri</p>
+                <p style="font-size: 18px; margin-bottom: 8px;">06:30 - 22:00</p>
+                <p style="font-size: 16px; font-weight: 600;">Sat - Sun</p>
+                <p style="font-size: 18px;">08:00 - 17:00</p>
+            `
+        };
+
+        // --- DOM ELEMENTS ---
+        const editor = document.getElementById('editor');
+        const btnPrint = document.getElementById('btn-print');
+        const selector = document.getElementById('template-select');
+        const chkMulti = document.getElementById('chk-multicopy');
+
+        // --- FUNCTIONS ---
+
+        function loadTemplate(name) {
+            if (TEMPLATES[name]) {
+                editor.innerHTML = TEMPLATES[name].trim();
+                selector.value = name;
+            }
+        }
+
+        function handlePrint() {
+            const rawContent = editor.innerHTML;
+            const isMulti = chkMulti.checked;
+            // Increased size to 10px (~7.5pt) for visibility and added padding to prevent cutoff
+            const footer = '<p style="font-size: 10px; margin-top: 10px; padding-bottom: 5px;">-MDW-</p>';
+            
+            let printContent = '';
+
+            if (isMulti) {
+                // Generate 10 copies with CSS separators
+                for (let i = 0; i < 10; i++) {
+                    printContent += `<div class="slip-container">${rawContent}${footer}</div>`;
+                    if (i < 9) {
+                        printContent += `<div class="cut-line"></div>`;
+                    }
+                }
+            } else {
+                // Single copy
+                printContent = `<div class="slip-container">${rawContent}${footer}</div>`;
+            }
+
+            // Open a new popup window (Robust Method)
+            const printWindow = window.open('', 'PrintSlip', 'height=600,width=400');
+
+            if (!printWindow) {
+                alert('Please allow popups to print!');
+                return;
+            }
+
+            printWindow.document.write(`
+                <html>
+                <head>
+                    <title>Print Slip</title>
+                    <style>
+                        /* RESET MARGINS FOR RECEIPT PRINTER */
+                        @page { margin: 0; size: auto; }
+                        
+                        html, body {
+                            font-family: Arial, sans-serif;
+                            margin: 0 !important;
+                            padding: 0 !important;
+                            text-align: center;
+                            color: black;
+                            background: white;
+                            width: 100%;
+                        }
+                        
+                        /* Ensure styles match the editor exactly */
+                        p { margin: 0; padding: 2px 0; }
+                        
+                        .slip-container {
+                            padding: 0; 
+                            padding-bottom: 10px;
+                            page-break-inside: avoid; 
+                            margin-top: 0 !important;
+                        }
+
+                        /* Kill margin on first element to prevent whitespace */
+                        .slip-container > :first-child {
+                            margin-top: 0 !important;
+                            padding-top: 0 !important;
+                        }
+                        
+                        .cut-line {
+                            margin: 15px auto;
+                            width: 100%;
+                            border-bottom: 1px dashed #000;
+                        }
+
+                        /* Hide things in print preview if necessary */
+                        @media print {
+                            body { -webkit-print-color-adjust: exact; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    ${printContent}
+                    <script>
+                        window.onload = function() {
+                            // Focus required for some browsers
+                            window.focus();
+                            // Trigger print
+                            window.print();
+                        }
+                        
+                        // Auto-close the popup after printing or cancelling
+                        window.onafterprint = function() {
+                            window.close();
+                        }
+                    <\/script>
+                </body>
+                </html>
+            `);
+            
+            printWindow.document.close();
+        }
+
+        // --- INITIALIZATION ---
+        // Load default but don't force select box
+        loadTemplate('Retention');
+
+        selector.addEventListener('change', (e) => loadTemplate(e.target.value));
+        btnPrint.addEventListener('click', handlePrint);
+        
+    </script>
+</body>
+</html>

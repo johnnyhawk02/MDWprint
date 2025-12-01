@@ -37,6 +37,12 @@ This document lists the content currently configured in the receipt printer appl
 
 ---
 
+**Title:** OAP £2 Swims
+**Mon Wed Fri:** 06:30 - 08:30
+**Tue Thu:** 12:00 - 13:00
+
+---
+
 **Title:** Rhymetime
 **Tue:** 10:30 and 14:00
 **Fri:** 10:30

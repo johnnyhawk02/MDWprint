@@ -51,3 +51,8 @@ This document lists the content currently configured in the receipt printer appl
 
 **Title:** Printouts
 **URL:** mdwprint.netlify.app
+
+---
+
+**Title:** Special Hours
+**Times:** 8:00 - 15:00

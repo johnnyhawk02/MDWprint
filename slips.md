@@ -69,5 +69,17 @@ This document lists the content currently configured in the receipt printer appl
 
 ---
 
+**Title:** Active Sefton App (iOS)
+**Type:** QR Code
+**URL:** https://apps.apple.com/gb/app/active-sefton/id6753793453
+
+---
+
+**Title:** Active Sefton App (Android)
+**Type:** QR Code
+**URL:** https://play.google.com/store/apps/details?id=com.innovatise.seftoncouncil&pcampaignid=web_share
+
+---
+
 **Title:** Printouts  
 **URL:** mdwprint.netlify.app

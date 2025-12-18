@@ -13,7 +13,7 @@
             padding: 0;
             height: 100vh;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #e2e8f0; /* Modern Light Gray */
+            background-color: #e2e8f0; 
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -24,8 +24,8 @@
             background: #ffffff;
             padding: 12px 20px;
             display: flex;
-            justify-content: flex-start; /* Aligns items to the left */
-            gap: 24px; /* Space between brand and controls */
+            justify-content: flex-start;
+            gap: 24px;
             align-items: center;
             border-bottom: 1px solid #cbd5e1;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
@@ -55,19 +55,19 @@
         #main-container {
             display: flex;
             flex-grow: 1;
-            overflow: hidden; /* Prevent body scroll */
+            overflow: hidden;
         }
 
         /* SIDEBAR */
         #sidebar {
-            width: 320px; /* Increased width for 2 columns */
+            width: 320px;
             background: #ffffff;
             border-right: 1px solid #cbd5e1;
-            display: grid; /* CHANGED TO GRID */
-            grid-template-columns: 1fr 1fr; /* 2 Equal Columns */
-            align-content: start; /* Pack items at the top */
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-content: start;
             padding: 15px;
-            gap: 10px; /* Gap between grid items */
+            gap: 10px;
             overflow-y: auto;
             flex-shrink: 0;
         }
@@ -77,16 +77,16 @@
             color: #334155;
             border: 1px solid transparent;
             padding: 10px;
-            text-align: center; /* Center text for grid look */
+            text-align: center;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 50px; /* Ensure consistency */
+            min-height: 50px;
         }
 
         .sidebar-btn:hover {
@@ -95,7 +95,7 @@
         }
 
         .sidebar-btn.active {
-            background: #3b82f6; /* Blue */
+            background: #3b82f6;
             color: white;
             border-color: #2563eb;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
@@ -104,21 +104,22 @@
         /* EDITOR AREA */
         #editor-container {
             flex-grow: 1;
-            padding: 40px;
+            padding: 20px;
             overflow-y: auto;
             display: flex;
             justify-content: center;
+            align-items: flex-start;
         }
 
         #paper {
             width: 100%;
-            max-width: 380px; /* Receipt Width */
+            max-width: 320px; /* Matched to safe thermal width */
             background: white;
-            min-height: 400px;
+            min-height: 500px;
             padding: 20px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            border-radius: 2px;
-            color: black; /* Force Black Text */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            color: black;
             height: fit-content;
         }
 
@@ -129,22 +130,23 @@
             word-wrap: break-word;
             font-size: 16px;
             line-height: 1.4;
-            text-align: center; /* Default Center */
+            text-align: center;
         }
         
         .editor-content p {
-            margin: 0; /* COMPACT SPACING */
+            margin: 0;
         }
         
-        /* Ensure images in editor are centered */
         .editor-content img {
             max-width: 100%;
             height: auto;
+            display: block;
+            margin: 0 auto;
         }
 
         /* PRINT BUTTON */
         #print-btn {
-            background-color: #0f172a; /* Slate 900 */
+            background-color: #0f172a;
             color: white;
             border: none;
             padding: 10px 24px;
@@ -155,15 +157,12 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: background-color 0.2s;
+            transition: all 0.2s;
         }
 
         #print-btn:hover {
             background-color: #1e293b;
-        }
-
-        #print-btn:active {
-            transform: translateY(1px);
+            transform: translateY(-1px);
         }
         
         /* CHECKBOX */
@@ -175,19 +174,11 @@
             font-weight: 600;
             color: #475569;
             cursor: pointer;
-            user-select: none;
-        }
-
-        input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
-            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
-    <!-- TOOLBAR -->
     <div id="toolbar">
         <div id="brand">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -211,29 +202,20 @@
         </div>
     </div>
 
-    <!-- MAIN AREA -->
     <div id="main-container">
-        
-        <!-- SIDEBAR (Template Selector) -->
-        <div id="sidebar">
-            <!-- Buttons injected by JS -->
-        </div>
-
-        <!-- EDITOR -->
+        <div id="sidebar"></div>
         <div id="editor-container">
             <div id="paper">
                 <div id="editor" class="editor-content" contenteditable="true"></div>
             </div>
         </div>
-
     </div>
 
     <script>
-        // --- DATA ---
         const TEMPLATES = {
             JanPromo: {
                 label: "January Offer",
-                content: `<p style="font-weight: 800; font-size: 28px; margin-bottom: 2px;">Active Sefton</p><p style="font-size: 14px; letter-spacing: 2px; font-weight: 600; margin-bottom: 12px; border-bottom: 1px solid #000; padding-bottom: 5px;">FITNESS</p><p style="font-weight: 700; font-size: 22px; margin-bottom: 10px;">January Promotion</p><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.activeseftonfitness.co.uk/memberships" style="width: 150px; height: 150px; display: block; margin: 0 auto 5px auto;"><p style="font-size: 14px; font-weight: 700; margin-bottom: 10px;">Scan to join online</p><p style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">Nothing to pay until February</p><p style="font-size: 14px; margin-bottom: 4px;">Pick membership type then click:</p><p style="font-size: 14px; font-weight: 700; font-style: italic; margin-bottom: 4px;">'Do you have a promotion code?'</p><p style="font-size: 14px; margin-bottom: 8px;">and enter this in the box:</p><p style="font-size: 26px; font-weight: 700; border: 2px dashed #000; padding: 4px 10px; display: inline-block; margin-bottom: 15px;">NEWYEARFREE</p><p style="font-size: 12px; margin-top: 5px;">Offer ends 31st Jan</p>`
+                content: `<p style="font-weight: 900; font-size: 32px; margin-bottom: 15px; white-space: nowrap;">JOIN ONLINE</p><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.activeseftonfitness.co.uk/memberships" style="width: 150px; height: 150px; display: block; margin: 0 auto 15px auto;"><p style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">Nothing to pay until February!</p><p style="font-size: 14px; margin-bottom: 5px;">Enter code at checkout:</p><p style="font-size: 26px; font-weight: 900; border: 3px dashed #000; padding: 5px 15px; display: inline-block; margin-bottom: 10px;">NEWYEARFREE</p><p style="font-size: 11px; margin-top: 10px;">Offer ends 31st January</p>`
             },
             MaleChange: {
                 content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 8px;">Male Change</p><p style="font-size: 32px; font-weight: 700;">1450</p>`
@@ -246,22 +228,22 @@
                 content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 8px;">Sauna & Steam</p><p style="font-size: 32px; font-weight: 700;">1580</p>`
             },
             GymTimes: {
-                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 10px;">Gym Times</p><div style="display: flex; justify-content: space-between; padding: 0 10px; margin-bottom: 4px; font-size: 16px;"><span style="font-weight: 600;">Mon - Fri</span><span>06:30 - 22:00</span></div><div style="display: flex; justify-content: space-between; padding: 0 10px; font-size: 16px;"><span style="font-weight: 600;">Sat - Sun</span><span>08:00 - 17:00</span></div>`
+                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 10px;">Gym Times</p><div style="display: flex; justify-content: space-between; width: 100%; padding: 0 5px; margin-bottom: 4px; font-size: 16px;"><span style="font-weight: 600;">Mon - Fri</span><span>06:30 - 22:00</span></div><div style="display: flex; justify-content: space-between; width: 100%; padding: 0 5px; font-size: 16px;"><span style="font-weight: 600;">Sat - Sun</span><span>08:00 - 17:00</span></div>`
             },
             SmallPool: {
                 label: "Small Pool",
-                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 10px;">Small Pool</p><p style="font-size: 14px; font-weight: 600; border-top: 1px dashed #000; border-bottom: 1px dashed #000; padding: 4px 0; margin-bottom: 8px;">Daytime Sessions</p><div style="display: flex; justify-content: space-between; padding: 0 10px; margin-bottom: 8px; font-size: 16px;"><span style="font-weight: 600;">Mon - Fri</span><div style="text-align: right;">06:30 - 09:00<br>12:00 - 13:00</div></div><p style="font-size: 14px; font-weight: 600; border-top: 1px dashed #000; border-bottom: 1px dashed #000; padding: 4px 0; margin-bottom: 8px;">Evening Sessions</p><div style="display: flex; justify-content: space-between; padding: 0 10px; margin-bottom: 4px; font-size: 16px;"><span style="font-weight: 600;">Tue Wed</span><span>19:15 - 20:00</span></div><div style="display: flex; justify-content: space-between; padding: 0 10px; font-size: 16px;"><span style="font-weight: 600;">Fri</span><span>19:00 - 20:00</span></div>`
+                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 10px;">Small Pool</p><p style="font-size: 14px; font-weight: 600; border-top: 1px dashed #000; border-bottom: 1px dashed #000; padding: 4px 0; margin-bottom: 8px;">Daytime Sessions</p><div style="display: flex; justify-content: space-between; width: 100%; padding: 0 5px; margin-bottom: 8px; font-size: 16px;"><span style="font-weight: 600;">Mon - Fri</span><div style="text-align: right;">06:30 - 09:00<br>12:00 - 13:00</div></div><p style="font-size: 14px; font-weight: 600; border-top: 1px dashed #000; border-bottom: 1px dashed #000; padding: 4px 0; margin-bottom: 8px;">Evening Sessions</p><div style="display: flex; justify-content: space-between; width: 100%; padding: 0 5px; margin-bottom: 4px; font-size: 16px;"><span style="font-weight: 600;">Tue Wed</span><span>19:15 - 20:00</span></div><div style="display: flex; justify-content: space-between; width: 100%; padding: 0 5px; font-size: 16px;"><span style="font-weight: 600;">Fri</span><span>19:00 - 20:00</span></div>`
             },
             AdultOnlySwims: {
                 label: "Adult only Swims",
-                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 10px;">Adult only Swims</p><p style="font-size: 14px; font-weight: 600; border-top: 1px dashed #000; border-bottom: 1px dashed #000; padding: 4px 0; margin-bottom: 8px;">Daytime Sessions</p><div style="display: flex; justify-content: space-between; padding: 0 10px; margin-bottom: 8px; font-size: 16px;"><span style="font-weight: 600;">Mon - Fri</span><span>12:00 - 13:00</span></div><p style="font-size: 14px; font-weight: 600; border-top: 1px dashed #000; border-bottom: 1px dashed #000; padding: 4px 0; margin-bottom: 8px;">Evening Sessions</p><div style="display: flex; justify-content: space-between; padding: 0 10px; margin-bottom: 4px; font-size: 16px;"><span style="font-weight: 600;">Mon Wed Thu</span><span>21:00 - 22:00</span></div><div style="display: flex; justify-content: space-between; padding: 0 10px; margin-bottom: 4px; font-size: 16px;"><span style="font-weight: 600;">Tue</span><span>20:45 - 21:45</span></div><div style="display: flex; justify-content: space-between; padding: 0 10px; font-size: 16px;"><span style="font-weight: 600;">Fri</span><span>20:00 - 21:00</span></div>`
+                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 10px;">Adult only Swims</p><p style="font-size: 14px; font-weight: 600; border-top: 1px dashed #000; border-bottom: 1px dashed #000; padding: 4px 0; margin-bottom: 8px;">Daytime Sessions</p><div style="display: flex; justify-content: space-between; width: 100%; padding: 0 5px; margin-bottom: 8px; font-size: 16px;"><span style="font-weight: 600;">Mon - Fri</span><span>12:00 - 13:00</span></div><p style="font-size: 14px; font-weight: 600; border-top: 1px dashed #000; border-bottom: 1px dashed #000; padding: 4px 0; margin-bottom: 8px;">Evening Sessions</p><div style="display: flex; justify-content: space-between; width: 100%; padding: 0 5px; margin-bottom: 4px; font-size: 16px;"><span style="font-weight: 600;">Mon Wed Thu</span><span>21:00 - 22:00</span></div><div style="display: flex; justify-content: space-between; width: 100%; padding: 0 5px; margin-bottom: 4px; font-size: 16px;"><span style="font-weight: 600;">Tue</span><span>20:45 - 21:45</span></div><div style="display: flex; justify-content: space-between; width: 100%; padding: 0 5px; font-size: 16px;"><span style="font-weight: 600;">Fri</span><span>20:00 - 21:00</span></div>`
             },
             OAPSwims: {
                 label: "OAP £2 Swims",
-                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 10px;">OAP £2 Swims</p><div style="display: flex; justify-content: space-between; padding: 0 10px; margin-bottom: 4px; font-size: 16px;"><span style="font-weight: 600;">Mon Wed Fri</span><span>06:30 - 08:30</span></div><div style="display: flex; justify-content: space-between; padding: 0 10px; font-size: 16px;"><span style="font-weight: 600;">Tue Thu</span><span>12:00 - 13:00</span></div>`
+                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 10px;">OAP £2 Swims</p><div style="display: flex; justify-content: space-between; width: 100%; padding: 0 5px; margin-bottom: 4px; font-size: 16px;"><span style="font-weight: 600;">Mon Wed Fri</span><span>06:30 - 08:30</span></div><div style="display: flex; justify-content: space-between; width: 100%; padding: 0 5px; font-size: 16px;"><span style="font-weight: 600;">Tue Thu</span><span>12:00 - 13:00</span></div>`
             },
             Rhymetime: {
-                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 10px;">Rhymetime</p><div style="display: flex; justify-content: space-between; padding: 0 10px; margin-bottom: 4px; font-size: 16px;"><span style="font-weight: 600;">Tue</span><span>10:30 and 14:00</span></div><div style="display: flex; justify-content: space-between; padding: 0 10px; font-size: 16px;"><span style="font-weight: 600;">Fri</span><span>10:30</span></div>`
+                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 10px;">Rhymetime</p><div style="display: flex; justify-content: space-between; width: 100%; padding: 0 5px; margin-bottom: 4px; font-size: 16px;"><span style="font-weight: 600;">Tue</span><span>10:30 and 14:00</span></div><div style="display: flex; justify-content: space-between; width: 100%; padding: 0 5px; font-size: 16px;"><span style="font-weight: 600;">Fri</span><span>10:30</span></div>`
             },
             Retention: {
                 content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 4px;">Retention</p><p style="font-size: 20px; margin-bottom: 4px;">0151 934 2858</p><p style="font-size: 20px;">retention@sefton.gov.uk</p>`
@@ -271,11 +253,11 @@
             },
             ActiveSeftonAppIOS: {
                 label: "App (iOS)",
-                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 10px;">Active Sefton App</p><p style="font-size: 16px; font-weight: 600; margin-bottom: 12px;">iOS / Apple</p><img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://apps.apple.com/gb/app/active-sefton/id6753793453" style="width: 160px; height: 160px; display: block; margin: 0 auto;">`
+                content: `<p style="font-weight: 700; font-size: 22px; margin-bottom: 10px;">Active Sefton App</p><p style="font-size: 15px; font-weight: 600; margin-bottom: 8px;">iOS / Apple</p><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://apps.apple.com/gb/app/active-sefton/id6753793453" style="width: 150px; height: 150px; display: block; margin: 0 auto;">`
             },
             ActiveSeftonAppAndroid: {
                 label: "App (Android)",
-                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 10px;">Active Sefton App</p><p style="font-size: 16px; font-weight: 600; margin-bottom: 12px;">Android / Google</p><img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://play.google.com/store/apps/details?id=com.innovatise.seftoncouncil&pcampaignid=web_share" style="width: 160px; height: 160px; display: block; margin: 0 auto;">`
+                content: `<p style="font-weight: 700; font-size: 22px; margin-bottom: 10px;">Active Sefton App</p><p style="font-size: 15px; font-weight: 600; margin-bottom: 8px;">Android / Google</p><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://play.google.com/store/apps/details?id=com.innovatise.seftoncouncil&pcampaignid=web_share" style="width: 150px; height: 150px; display: block; margin: 0 auto;">`
             },
             Printouts: {
                 content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 8px;">Printouts</p><p style="font-size: 18px;">mdwprint.netlify.app</p>`
@@ -291,8 +273,6 @@
             'Aquatics', 'ActiveSeftonAppIOS',
             'ActiveSeftonAppAndroid', 'Printouts'
         ];
-
-        let currentTemplateKey = 'JanPromo';
 
         window.addEventListener('DOMContentLoaded', () => {
             renderSidebar();
@@ -314,7 +294,6 @@
         }
 
         function loadTemplate(key) {
-            currentTemplateKey = key;
             const editor = document.getElementById('editor');
             editor.innerHTML = TEMPLATES[key].content;
             document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
@@ -325,7 +304,7 @@
         function handlePrint() {
             const editorContent = document.getElementById('editor').innerHTML;
             const is10x = document.getElementById('copy-check').checked;
-            const printWindow = window.open('', '_blank', 'width=400,height=600');
+            const printWindow = window.open('', '_blank', 'width=450,height=600');
             
             if (!printWindow) {
                 alert("Pop-up blocked! Please allow pop-ups for this site to print.");
@@ -344,30 +323,57 @@
                 <head>
                     <title>Print Slip</title>
                     <style>
-                        @page { margin: 0; size: auto; }
-                        html, body { margin: 0 !important; padding: 0 !important; }
-                        body { font-family: sans-serif; color: black; background: white; }
+                        @page { margin: 0; }
+                        * { box-sizing: border-box; }
+                        html, body { 
+                            margin: 0 !important; 
+                            padding: 0 !important; 
+                            width: 100% !important;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center; /* Crucial for thermal centering */
+                            background: white;
+                            color: black;
+                            font-family: -apple-system, system-ui, sans-serif;
+                        }
                         .slip-container {
-                            padding: 20px; 
+                            width: 300px; /* Reduced to 300px to avoid any RHS cutoff on 80mm paper */
+                            max-width: 300px;
+                            padding: 15px 5px; 
                             text-align: center;
                             page-break-inside: avoid;
                             border-bottom: ${is10x ? '1px dashed black' : 'none'};
-                            position: relative;
                             display: block;
                             font-size: 16px;
-                            line-height: 1.4;
-                            max-width: 380px;
+                            line-height: 1.3;
                             margin: 0 auto;
                         }
-                        img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
-                        .slip-container:first-child { padding-top: 0; }
-                        p { margin: 0; padding: 0; }
-                        .footer-mdw { font-size: 4px; color: #000; margin-top: 10px; width: 100%; text-align: center; }
+                        /* Enforce flex behavior for rows to prevent RHS cutoff */
+                        .slip-container div[style*="display: flex"] {
+                            display: flex !important;
+                            width: 100% !important;
+                            justify-content: space-between !important;
+                            align-items: center !important;
+                            text-align: left; /* Left align text inside flex items */
+                        }
+                        .slip-container div[style*="display: flex"] span:last-child {
+                            text-align: right !important; /* Right align the time/RHS */
+                        }
+                        img { max-width: 100%; height: auto; display: block; margin: 10px auto; }
+                        p { margin: 0; padding: 0; text-align: center; }
+                        .footer-mdw { font-size: 4px; color: #000; margin-top: 15px; text-align: center; width: 100%; opacity: 0.4; }
                     </style>
                 </head>
                 <body>
                     ${printHTML}
-                    <script>window.onload = function() { window.print(); }<\/script>
+                    <script>
+                        window.onload = function() { 
+                            setTimeout(() => {
+                                window.print();
+                                window.close();
+                            }, 500);
+                        }
+                    <\/script>
                 </body>
                 </html>
             `);

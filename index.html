@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slip Printer</title>
+    <title>Active Sefton | Slip Printer</title>
     <style>
         /* --- APP STYLES --- */
         * { box-sizing: border-box; }
@@ -25,12 +25,30 @@
             padding: 12px 20px;
             display: flex;
             justify-content: flex-start; /* Aligns items to the left */
-            gap: 24px; /* Space between button and checkbox */
+            gap: 24px; /* Space between brand and controls */
             align-items: center;
             border-bottom: 1px solid #cbd5e1;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             flex-shrink: 0;
             z-index: 10;
+        }
+
+        #brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 18px;
+            color: #0f172a;
+            letter-spacing: -0.5px;
+            padding-right: 20px;
+            border-right: 2px solid #e2e8f0;
+        }
+
+        #toolbar-controls {
+            display: flex;
+            align-items: center;
+            gap: 24px;
         }
 
         /* MAIN LAYOUT */
@@ -129,9 +147,9 @@
             background-color: #0f172a; /* Slate 900 */
             color: white;
             border: none;
-            padding: 12px 24px;
+            padding: 10px 24px;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
             display: flex;
@@ -153,36 +171,44 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            color: #334155;
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
             cursor: pointer;
             user-select: none;
         }
 
         input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             cursor: pointer;
         }
-
-        /* --- PRINT WINDOW CSS (INJECTED) --- */
     </style>
 </head>
 <body>
 
     <!-- TOOLBAR -->
     <div id="toolbar">
-        <button id="print-btn" onclick="handlePrint()">
-            <!-- Printer Icon SVG -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2-2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-            PRINT
-        </button>
+        <div id="brand">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2 17L12 22L22 17" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2 12L12 17L22 12" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Active Sefton
+        </div>
         
-        <label class="checkbox-label">
-            <input type="checkbox" id="copy-check">
-            10x Copies
-        </label>
+        <div id="toolbar-controls">
+            <button id="print-btn" onclick="handlePrint()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2-2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                PRINT SLIP
+            </button>
+            
+            <label class="checkbox-label">
+                <input type="checkbox" id="copy-check">
+                10x COPIES
+            </label>
+        </div>
     </div>
 
     <!-- MAIN AREA -->
@@ -204,9 +230,45 @@
 
     <script>
         // --- DATA ---
-        // Source of Truth: slips.md
-        // Updated: Titles now 24px
         const TEMPLATES = {
+            JanPromo: {
+                label: "January Offer",
+                content: `<p style="font-weight: 800; font-size: 28px; margin-bottom: 2px;">Active Sefton</p><p style="font-size: 14px; letter-spacing: 2px; font-weight: 600; margin-bottom: 12px; border-bottom: 1px solid #000; padding-bottom: 5px;">FITNESS</p><p style="font-weight: 700; font-size: 22px; margin-bottom: 10px;">January Promotion</p><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.activeseftonfitness.co.uk/memberships" style="width: 150px; height: 150px; display: block; margin: 0 auto 5px auto;"><p style="font-size: 14px; font-weight: 700; margin-bottom: 10px;">Scan to join online</p><p style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">Nothing to pay until February</p><p style="font-size: 14px; margin-bottom: 4px;">Pick membership type then click:</p><p style="font-size: 14px; font-weight: 700; font-style: italic; margin-bottom: 4px;">'Do you have a promotion code?'</p><p style="font-size: 14px; margin-bottom: 8px;">and enter this in the box:</p><p style="font-size: 26px; font-weight: 700; border: 2px dashed #000; padding: 4px 10px; display: inline-block; margin-bottom: 15px;">NEWYEARFREE</p><p style="font-size: 12px; margin-top: 5px;">Offer ends 31st Jan</p>`
+            },
+            MaleChange: {
+                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 8px;">Male Change</p><p style="font-size: 32px; font-weight: 700;">1450</p>`
+            },
+            FemaleChange: {
+                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 8px;">Female Change</p><p style="font-size: 32px; font-weight: 700;">1350</p>`
+            },
+            SaunaSteam: {
+                label: "Sauna & Steam",
+                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 8px;">Sauna & Steam</p><p style="font-size: 32px; font-weight: 700;">1580</p>`
+            },
+            GymTimes: {
+                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 10px;">Gym Times</p><div style="display: flex; justify-content: space-between; padding: 0 10px; margin-bottom: 4px; font-size: 16px;"><span style="font-weight: 600;">Mon - Fri</span><span>06:30 - 22:00</span></div><div style="display: flex; justify-content: space-between; padding: 0 10px; font-size: 16px;"><span style="font-weight: 600;">Sat - Sun</span><span>08:00 - 17:00</span></div>`
+            },
+            SmallPool: {
+                label: "Small Pool",
+                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 10px;">Small Pool</p><p style="font-size: 14px; font-weight: 600; border-top: 1px dashed #000; border-bottom: 1px dashed #000; padding: 4px 0; margin-bottom: 8px;">Daytime Sessions</p><div style="display: flex; justify-content: space-between; padding: 0 10px; margin-bottom: 8px; font-size: 16px;"><span style="font-weight: 600;">Mon - Fri</span><div style="text-align: right;">06:30 - 09:00<br>12:00 - 13:00</div></div><p style="font-size: 14px; font-weight: 600; border-top: 1px dashed #000; border-bottom: 1px dashed #000; padding: 4px 0; margin-bottom: 8px;">Evening Sessions</p><div style="display: flex; justify-content: space-between; padding: 0 10px; margin-bottom: 4px; font-size: 16px;"><span style="font-weight: 600;">Tue Wed</span><span>19:15 - 20:00</span></div><div style="display: flex; justify-content: space-between; padding: 0 10px; font-size: 16px;"><span style="font-weight: 600;">Fri</span><span>19:00 - 20:00</span></div>`
+            },
+            AdultOnlySwims: {
+                label: "Adult only Swims",
+                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 10px;">Adult only Swims</p><p style="font-size: 14px; font-weight: 600; border-top: 1px dashed #000; border-bottom: 1px dashed #000; padding: 4px 0; margin-bottom: 8px;">Daytime Sessions</p><div style="display: flex; justify-content: space-between; padding: 0 10px; margin-bottom: 8px; font-size: 16px;"><span style="font-weight: 600;">Mon - Fri</span><span>12:00 - 13:00</span></div><p style="font-size: 14px; font-weight: 600; border-top: 1px dashed #000; border-bottom: 1px dashed #000; padding: 4px 0; margin-bottom: 8px;">Evening Sessions</p><div style="display: flex; justify-content: space-between; padding: 0 10px; margin-bottom: 4px; font-size: 16px;"><span style="font-weight: 600;">Mon Wed Thu</span><span>21:00 - 22:00</span></div><div style="display: flex; justify-content: space-between; padding: 0 10px; margin-bottom: 4px; font-size: 16px;"><span style="font-weight: 600;">Tue</span><span>20:45 - 21:45</span></div><div style="display: flex; justify-content: space-between; padding: 0 10px; font-size: 16px;"><span style="font-weight: 600;">Fri</span><span>20:00 - 21:00</span></div>`
+            },
+            OAPSwims: {
+                label: "OAP £2 Swims",
+                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 10px;">OAP £2 Swims</p><div style="display: flex; justify-content: space-between; padding: 0 10px; margin-bottom: 4px; font-size: 16px;"><span style="font-weight: 600;">Mon Wed Fri</span><span>06:30 - 08:30</span></div><div style="display: flex; justify-content: space-between; padding: 0 10px; font-size: 16px;"><span style="font-weight: 600;">Tue Thu</span><span>12:00 - 13:00</span></div>`
+            },
+            Rhymetime: {
+                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 10px;">Rhymetime</p><div style="display: flex; justify-content: space-between; padding: 0 10px; margin-bottom: 4px; font-size: 16px;"><span style="font-weight: 600;">Tue</span><span>10:30 and 14:00</span></div><div style="display: flex; justify-content: space-between; padding: 0 10px; font-size: 16px;"><span style="font-weight: 600;">Fri</span><span>10:30</span></div>`
+            },
+            Retention: {
+                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 4px;">Retention</p><p style="font-size: 20px; margin-bottom: 4px;">0151 934 2858</p><p style="font-size: 20px;">retention@sefton.gov.uk</p>`
+            },
+            Aquatics: {
+                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 4px;">Aquatics</p><p style="font-size: 20px; margin-bottom: 4px;">0151 934 2927</p><p style="font-size: 20px;">active.aquatics@sefton.gov.uk</p>`
+            },
             ActiveSeftonAppIOS: {
                 label: "App (iOS)",
                 content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 10px;">Active Sefton App</p><p style="font-size: 16px; font-weight: 600; margin-bottom: 12px;">iOS / Apple</p><img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://apps.apple.com/gb/app/active-sefton/id6753793453" style="width: 160px; height: 160px; display: block; margin: 0 auto;">`
@@ -215,68 +277,34 @@
                 label: "App (Android)",
                 content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 10px;">Active Sefton App</p><p style="font-size: 16px; font-weight: 600; margin-bottom: 12px;">Android / Google</p><img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://play.google.com/store/apps/details?id=com.innovatise.seftoncouncil&pcampaignid=web_share" style="width: 160px; height: 160px; display: block; margin: 0 auto;">`
             },
-            AdultOnlySwims: {
-                label: "Adult only Swims",
-                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 10px;">Adult only Swims</p><p style="font-size: 14px; font-weight: 600; border-top: 1px dashed #000; border-bottom: 1px dashed #000; padding: 4px 0; margin-bottom: 8px;">Daytime Sessions</p><div style="display: flex; justify-content: space-between; padding: 0 10px; margin-bottom: 8px; font-size: 16px;"><span style="font-weight: 600;">Mon - Fri</span><span>12:00 - 13:00</span></div><p style="font-size: 14px; font-weight: 600; border-top: 1px dashed #000; border-bottom: 1px dashed #000; padding: 4px 0; margin-bottom: 8px;">Evening Sessions</p><div style="display: flex; justify-content: space-between; padding: 0 10px; margin-bottom: 4px; font-size: 16px;"><span style="font-weight: 600;">Mon Wed Thu</span><span>21:00 - 22:00</span></div><div style="display: flex; justify-content: space-between; padding: 0 10px; margin-bottom: 4px; font-size: 16px;"><span style="font-weight: 600;">Tue</span><span>20:45 - 21:45</span></div><div style="display: flex; justify-content: space-between; padding: 0 10px; font-size: 16px;"><span style="font-weight: 600;">Fri</span><span>20:00 - 21:00</span></div>`
-            },
-            Aquatics: {
-                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 4px;">Aquatics</p><p style="font-size: 20px; margin-bottom: 4px;">0151 934 2927</p><p style="font-size: 20px;">active.aquatics@sefton.gov.uk</p>`
-            },
-            FemaleChange: {
-                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 8px;">Female Change</p><p style="font-size: 32px; font-weight: 700;">1350</p>`
-            },
-            GymTimes: {
-                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 10px;">Gym Times</p><div style="display: flex; justify-content: space-between; padding: 0 10px; margin-bottom: 4px; font-size: 16px;"><span style="font-weight: 600;">Mon - Fri</span><span>06:30 - 22:00</span></div><div style="display: flex; justify-content: space-between; padding: 0 10px; font-size: 16px;"><span style="font-weight: 600;">Sat - Sun</span><span>08:00 - 17:00</span></div>`
-            },
-            MaleChange: {
-                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 8px;">Male Change</p><p style="font-size: 32px; font-weight: 700;">1450</p>`
-            },
-            OAPSwims: {
-                label: "OAP £2 Swims",
-                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 10px;">OAP £2 Swims</p><div style="display: flex; justify-content: space-between; padding: 0 10px; margin-bottom: 4px; font-size: 16px;"><span style="font-weight: 600;">Mon Wed Fri</span><span>06:30 - 08:30</span></div><div style="display: flex; justify-content: space-between; padding: 0 10px; font-size: 16px;"><span style="font-weight: 600;">Tue Thu</span><span>12:00 - 13:00</span></div>`
-            },
             Printouts: {
                 content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 8px;">Printouts</p><p style="font-size: 18px;">mdwprint.netlify.app</p>`
-            },
-            Retention: {
-                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 4px;">Retention</p><p style="font-size: 20px; margin-bottom: 4px;">0151 934 2858</p><p style="font-size: 20px;">retention@sefton.gov.uk</p>`
-            },
-            Rhymetime: {
-                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 10px;">Rhymetime</p><div style="display: flex; justify-content: space-between; padding: 0 10px; margin-bottom: 4px; font-size: 16px;"><span style="font-weight: 600;">Tue</span><span>10:30 and 14:00</span></div><div style="display: flex; justify-content: space-between; padding: 0 10px; font-size: 16px;"><span style="font-weight: 600;">Fri</span><span>10:30</span></div>`
-            },
-            SaunaSteam: {
-                label: "Sauna & Steam",
-                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 8px;">Sauna & Steam</p><p style="font-size: 32px; font-weight: 700;">1580</p>`
-            },
-            SmallPool: {
-                label: "Small Pool",
-                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 10px;">Small Pool</p><p style="font-size: 14px; font-weight: 600; border-top: 1px dashed #000; border-bottom: 1px dashed #000; padding: 4px 0; margin-bottom: 8px;">Daytime Sessions</p><div style="display: flex; justify-content: space-between; padding: 0 10px; margin-bottom: 8px; font-size: 16px;"><span style="font-weight: 600;">Mon - Fri</span><div style="text-align: right;">06:30 - 09:00<br>12:00 - 13:00</div></div><p style="font-size: 14px; font-weight: 600; border-top: 1px dashed #000; border-bottom: 1px dashed #000; padding: 4px 0; margin-bottom: 8px;">Evening Sessions</p><div style="display: flex; justify-content: space-between; padding: 0 10px; margin-bottom: 4px; font-size: 16px;"><span style="font-weight: 600;">Tue Wed</span><span>19:15 - 20:00</span></div><div style="display: flex; justify-content: space-between; padding: 0 10px; font-size: 16px;"><span style="font-weight: 600;">Fri</span><span>19:00 - 20:00</span></div>`
             }
         };
 
-        // Custom Order: Codes -> Timetables -> Contact -> Misc
         const BUTTON_ORDER = [
-            'MaleChange', 'FemaleChange', 'SaunaSteam',
-            'GymTimes', 'SmallPool', 'AdultOnlySwims', 'OAPSwims', 'Rhymetime',
-            'Retention', 'Aquatics', 'ActiveSeftonAppIOS', 'ActiveSeftonAppAndroid', 'Printouts'
+            'JanPromo', 'MaleChange',
+            'FemaleChange', 'SaunaSteam',
+            'GymTimes', 'SmallPool',
+            'AdultOnlySwims', 'OAPSwims',
+            'Rhymetime', 'Retention',
+            'Aquatics', 'ActiveSeftonAppIOS',
+            'ActiveSeftonAppAndroid', 'Printouts'
         ];
 
-        let currentTemplateKey = 'Retention';
+        let currentTemplateKey = 'JanPromo';
 
-        // --- INIT ---
         window.addEventListener('DOMContentLoaded', () => {
             renderSidebar();
-            loadTemplate('Retention');
+            loadTemplate('JanPromo');
         });
 
         function renderSidebar() {
             const sidebar = document.getElementById('sidebar');
-            
             BUTTON_ORDER.forEach(key => {
                 if (TEMPLATES[key]) {
                     const btn = document.createElement('div');
                     btn.className = 'sidebar-btn';
-                    // Use custom label if available, else key
                     btn.innerText = TEMPLATES[key].label || key.replace(/([A-Z])/g, ' $1').trim(); 
                     btn.onclick = () => loadTemplate(key);
                     btn.id = `btn-${key}`;
@@ -289,19 +317,14 @@
             currentTemplateKey = key;
             const editor = document.getElementById('editor');
             editor.innerHTML = TEMPLATES[key].content;
-            
-            // Highlight active button
             document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
             const activeBtn = document.getElementById(`btn-${key}`);
             if (activeBtn) activeBtn.classList.add('active');
         }
 
-        // --- PRINTING LOGIC ---
         function handlePrint() {
             const editorContent = document.getElementById('editor').innerHTML;
             const is10x = document.getElementById('copy-check').checked;
-            
-            // Create a Popup Window
             const printWindow = window.open('', '_blank', 'width=400,height=600');
             
             if (!printWindow) {
@@ -309,90 +332,45 @@
                 return;
             }
 
-            // Build the Slip HTML
             let printHTML = '';
             const count = is10x ? 10 : 1;
-
             for (let i = 0; i < count; i++) {
-                printHTML += `
-                    <div class="slip-container">
-                        ${editorContent}
-                        <div class="footer-mdw">-MDW-</div>
-                    </div>
-                `;
+                printHTML += `<div class="slip-container">${editorContent}<div class="footer-mdw">-MDW-</div></div>`;
             }
 
-            // Write to the window
             printWindow.document.write(`
                 <!DOCTYPE html>
                 <html>
                 <head>
-                    <title>Print</title>
+                    <title>Print Slip</title>
                     <style>
-                        /* RESET */
                         @page { margin: 0; size: auto; }
                         html, body { margin: 0 !important; padding: 0 !important; }
-                        
-                        body { 
-                            font-family: sans-serif; 
-                            color: black;
-                            background: white;
-                        }
-
+                        body { font-family: sans-serif; color: black; background: white; }
                         .slip-container {
-                            /* PADDING INSTEAD OF MARGIN TO SURVIVE PAGE BREAKS */
                             padding: 20px; 
                             text-align: center;
                             page-break-inside: avoid;
-                            border-bottom: ${is10x ? '1px dashed black' : 'none'}; /* CONDITIONAL CUT LINE */
+                            border-bottom: ${is10x ? '1px dashed black' : 'none'};
                             position: relative;
-                            
-                            /* Layout fixes to match preview */
                             display: block;
                             font-size: 16px;
                             line-height: 1.4;
-                            max-width: 380px; /* Constrain width to match preview behavior on wider paper */
-                            margin: 0 auto; /* Center the slip on the page */
+                            max-width: 380px;
+                            margin: 0 auto;
                         }
-
-                        /* Ensure images print correctly */
-                        img {
-                            max-width: 100%;
-                            height: auto;
-                            display: block;
-                            margin-left: auto;
-                            margin-right: auto;
-                        }
-
-                        /* NO TOP PADDING FOR THE VERY FIRST SLIP */
-                        .slip-container:first-child {
-                            padding-top: 0;
-                        }
-
+                        img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+                        .slip-container:first-child { padding-top: 0; }
                         p { margin: 0; padding: 0; }
-                        
-                        .footer-mdw {
-                            font-size: 4px;
-                            color: #000;
-                            margin-top: 10px;
-                            width: 100%;
-                            text-align: center;
-                        }
+                        .footer-mdw { font-size: 4px; color: #000; margin-top: 10px; width: 100%; text-align: center; }
                     </style>
                 </head>
                 <body>
                     ${printHTML}
-                    <script>
-                        window.onload = function() {
-                            window.print();
-                            // Optional: Close after print
-                            // setTimeout(() => window.close(), 500); 
-                        }
-                    <\/script>
+                    <script>window.onload = function() { window.print(); }<\/script>
                 </body>
                 </html>
             `);
-            
             printWindow.document.close();
         }
     </script>

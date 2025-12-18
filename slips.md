@@ -5,6 +5,16 @@ This document lists the content currently configured in the receipt printer appl
 
 ---
 
+**Title:** January Promotion
+**Details:** Nothing to pay until February
+**Promo Code:** NEWYEARFREE
+**Action:** QR code to Membership Page
+**Instruction:** Select your membership type, then click 'Do you have a promotion code?' and enter 'NEWYEARFREE' in the box BEFORE starting to fill in your info.
+**URL:** https://www.activeseftonfitness.co.uk/memberships
+**End Date:** 31st January
+
+---
+
 **Title:** Adult only Swims  
 **Daytime Sessions:**  
 **Mon - Fri:** 12:00 - 13:00  

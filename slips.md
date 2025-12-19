@@ -1,4 +1,3 @@
-
 # Slip Templates Reference
 
 This document lists the content currently configured in the receipt printer application.
@@ -6,10 +5,12 @@ This document lists the content currently configured in the receipt printer appl
 ---
 
 **Title:** January Promotion
-**Details:** Nothing to pay until February
+**Primary Message:** NOTHING TO PAY UNTIL FEBRUARY
+**Sub-message:** Join online in minutes
 **Promo Code:** NEWYEARFREE
 **Action:** QR code to Membership Page
-**Instruction:** Select your membership type, then click 'Do you have a promotion code?' and enter 'NEWYEARFREE' in the box BEFORE starting to fill in your info.
+**Instruction:** Enter code before filling in form:
+**Footer Line:** Applies to all direct debit memberships
 **URL:** https://www.activeseftonfitness.co.uk/memberships
 **End Date:** 31st January
 

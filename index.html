@@ -563,6 +563,12 @@
             document.getElementById('gh-step-error').style.display = 'block';
             document.getElementById('gh-error-msg').innerText = msg;
         }
+
+        // Hide GitHub Sync button on production site
+        if (window.location.hostname === 'mdwprint.netlify.app') {
+            const ghBtn = document.getElementById('github-btn');
+            if (ghBtn) ghBtn.style.display = 'none';
+        }
     </script>
 </body>
 </html>

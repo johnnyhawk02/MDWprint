@@ -16,6 +16,12 @@ This document lists the content currently configured in the receipt printer appl
 
 ---
 
+**Title:** Join Online
+**Type:** QR Code
+**URL:** https://activesefton.gladstonego.cloud/site-finder
+
+---
+
 **Title:** Adult only Swims  
 **Daytime Sessions:**  
 **Mon - Fri:** 12:00 - 13:00  

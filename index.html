@@ -256,10 +256,7 @@
 
     <script>
         const TEMPLATES = {
-            JanPromo: {
-                label: "January Offer",
-                content: `<p style="font-weight: 900; font-size: 22px; margin-bottom: 4px; line-height: 1.1;">NOTHING TO PAY UNTIL FEBRUARY</p><p style="font-size: 16px; margin-bottom: 12px;">Join online in minutes</p><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.activeseftonfitness.co.uk/memberships" style="width: 140px; height: 140px; display: block; margin: 0 auto 12px auto;"><p style="font-size: 14px; margin-bottom: 6px;">Enter code before filling in form:</p><p style="font-size: 24px; font-weight: 900; border: 3px dashed #000; padding: 4px 10px; display: inline-block; margin-bottom: 10px; max-width: 100%; white-space: nowrap;">NEWYEARFREE</p><p style="font-size: 12px; margin-bottom: 4px;">Offer ends 31st January</p><p style="font-size: 10px; margin-top: 10px; font-style: italic;">Applies to all direct debit memberships</p>`
-            },
+
             JoinOnline: {
                 label: "Join Online",
                 content: `<p style="font-weight: 900; font-size: 22px; margin-bottom: 4px; line-height: 1.1;">JOIN ONLINE</p><p style="font-size: 16px; margin-bottom: 12px;">Scan to sign up</p><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://activesefton.gladstonego.cloud/site-finder" style="width: 140px; height: 140px; display: block; margin: 0 auto;"><div style="text-align: left; font-size: 14px; margin-top: 15px; padding: 0 10px;"><p style="margin-bottom: 4px; font-weight: 600;">How to join:</p><ol style="margin: 0; padding-left: 20px; line-height: 1.4;"><li>Scan the QR code above</li><li>Select your preferred centre</li><li>Choose your membership</li><li>Enter your details to complete</li></ol></div>`
@@ -312,7 +309,7 @@
         };
 
         const BUTTON_ORDER = [
-            'JanPromo', 'JoinOnline', 'MaleChange',
+            'JoinOnline', 'MaleChange',
             'FemaleChange', 'SaunaSteam',
             'GymTimes', 'SmallPool',
             'AdultOnlySwims', 'OAPSwims',
@@ -323,7 +320,7 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             renderSidebar();
-            loadTemplate('JanPromo');
+            loadTemplate('JoinOnline');
         });
 
         function renderSidebar() {

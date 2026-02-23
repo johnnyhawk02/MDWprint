@@ -1,20 +1,33 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Active Sefton Slip Printer
 
-# Run and deploy your AI Studio app
+A lightweight, single-file receipt printing utility for Active Sefton.
 
-This contains everything you need to run your app locally.
+## Features
 
-View your app in AI Studio: https://ai.studio/apps/drive/1jq0GmL8Cn_BCh7ddXvo0JePcUdRnflEo
+- Print custom slips for various facility services (Gym Times, Pool Schedules, etc.)
+- Generate QR codes for quick access to online services
+- Responsive sidebar navigation
+- Print multiple copies (10x) option
 
-## Run Locally
+## Usage
 
-**Prerequisites:**  Node.js
+1. Select a template from the sidebar.
+2. Edit the content if necessary (text is editable).
+3. Click "PRINT SLIP" to generate a print-friendly version.
 
+## Development
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```bash
+npm install
+npm run dev
+```
+
+## Deployment
+
+Build the project:
+
+```bash
+npm run build
+```
+
+The output will be in the `dist` folder.

@@ -4,16 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Active Sefton | Slip Printer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         /* --- APP STYLES --- */
+        :root {
+            --bg-app: #f1f5f9;
+            --bg-sidebar: #ffffff;
+            --bg-paper: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --border: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
         * { box-sizing: border-box; }
         
         body {
             margin: 0;
             padding: 0;
             height: 100vh;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #e2e8f0; 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-app);
+            color: var(--text-primary);
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -21,34 +39,31 @@
 
         /* TOOLBAR */
         #toolbar {
-            background: #ffffff;
-            padding: 12px 20px;
+            background: var(--bg-sidebar);
+            padding: 16px 24px;
             display: flex;
-            justify-content: flex-start;
-            gap: 24px;
+            justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #cbd5e1;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
             flex-shrink: 0;
-            z-index: 10;
+            z-index: 20;
         }
 
         #brand {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-weight: 800;
+            gap: 12px;
+            font-weight: 700;
             font-size: 18px;
-            color: #0f172a;
-            letter-spacing: -0.5px;
-            padding-right: 20px;
-            border-right: 2px solid #e2e8f0;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
         }
 
         #toolbar-controls {
             display: flex;
             align-items: center;
-            gap: 24px;
+            gap: 16px;
         }
 
         /* MAIN LAYOUT */
@@ -60,67 +75,83 @@
 
         /* SIDEBAR */
         #sidebar {
-            width: 320px;
-            background: #ffffff;
-            border-right: 1px solid #cbd5e1;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-content: start;
-            padding: 15px;
-            gap: 10px;
+            width: 340px;
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            gap: 12px;
             overflow-y: auto;
             flex-shrink: 0;
         }
 
         .sidebar-btn {
-            background: #f1f5f9;
-            color: #334155;
-            border: 1px solid transparent;
-            padding: 10px;
-            text-align: center;
-            border-radius: 6px;
+            background: white;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            padding: 14px 16px;
+            text-align: left;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 500;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
-            justify-content: center;
-            min-height: 50px;
+            justify-content: flex-start;
+            box-shadow: var(--shadow-sm);
         }
 
         .sidebar-btn:hover {
-            background: #e2e8f0;
-            color: #0f172a;
+            border-color: var(--accent);
+            color: var(--accent);
+            background: #eff6ff;
+            transform: translateY(-1px);
         }
 
         .sidebar-btn.active {
-            background: #3b82f6;
+            background: var(--accent);
             color: white;
-            border-color: #2563eb;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-color: var(--accent);
+            box-shadow: var(--shadow-md);
+            font-weight: 600;
         }
 
         /* EDITOR AREA */
         #editor-container {
             flex-grow: 1;
-            padding: 20px;
+            padding: 40px;
             overflow-y: auto;
             display: flex;
             justify-content: center;
             align-items: flex-start;
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 24px 24px;
         }
 
         #paper {
             width: 100%;
             max-width: 320px; 
-            background: white;
-            min-height: 500px;
-            padding: 20px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            border-radius: 4px;
+            background: var(--bg-paper);
+            min-height: 600px;
+            padding: 24px;
+            box-shadow: var(--shadow-lg);
+            border-radius: 2px;
             color: black;
             height: fit-content;
+            position: relative;
+        }
+        
+        #paper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ef4444, #f59e0b, #10b981, #3b82f6, #6366f1, #8b5cf6, #ec4899);
+            opacity: 0.8;
         }
 
         /* EDITOR CONTENT STYLES */
@@ -129,7 +160,7 @@
             white-space: pre-wrap;
             word-wrap: break-word;
             font-size: 16px;
-            line-height: 1.4;
+            line-height: 1.5;
             text-align: center;
         }
         
@@ -141,15 +172,15 @@
             max-width: 100%;
             height: auto;
             display: block;
-            margin: 0 auto;
+            margin: 12px auto;
         }
 
         /* PRINT BUTTON */
         #print-btn {
-            background-color: #0f172a;
+            background-color: var(--text-primary);
             color: white;
             border: none;
-            padding: 10px 24px;
+            padding: 10px 20px;
             border-radius: 8px;
             font-size: 14px;
             font-weight: 600;
@@ -158,11 +189,13 @@
             align-items: center;
             gap: 8px;
             transition: all 0.2s;
+            box-shadow: var(--shadow-md);
         }
 
         #print-btn:hover {
             background-color: #1e293b;
             transform: translateY(-1px);
+            box-shadow: var(--shadow-lg);
         }
         
         /* CHECKBOX */
@@ -172,8 +205,38 @@
             gap: 8px;
             font-size: 13px;
             font-weight: 600;
-            color: #475569;
+            color: var(--text-secondary);
             cursor: pointer;
+            user-select: none;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+        
+        .checkbox-label:hover {
+            background: #f8fafc;
+        }
+
+        /* GitHub Button */
+        #github-btn {
+            background-color: #24292e;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+        
+        #github-btn:hover {
+            background-color: #1b1f23;
+            transform: translateY(-1px);
         }
     </style>
 <link rel="stylesheet" href="/index.css">
@@ -257,9 +320,9 @@
     <script>
         const TEMPLATES = {
 
-            JoinOnline: {
-                label: "Join Online",
-                content: `<p style="font-weight: 900; font-size: 22px; margin-bottom: 4px; line-height: 1.1;">JOIN ONLINE</p><p style="font-size: 16px; margin-bottom: 12px;">Scan to sign up</p><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://activesefton.gladstonego.cloud/site-finder" style="width: 140px; height: 140px; display: block; margin: 0 auto;"><div style="text-align: left; font-size: 14px; margin-top: 15px; padding: 0 10px;"><p style="margin-bottom: 4px; font-weight: 600;">How to join:</p><ol style="margin: 0; padding-left: 20px; line-height: 1.4;"><li>Scan the QR code above</li><li>Select your preferred centre</li><li>Choose your membership</li><li>Enter your details to complete</li></ol></div>`
+            JoinOnlineMyFitApp: {
+                label: "GET APP / JOIN",
+                content: `<div style="font-family: 'Inter', sans-serif; color: #0f172a;"><p style="font-weight: 900; font-size: 24px; margin-bottom: 16px; line-height: 1; letter-spacing: -0.03em;">GET APP / JOIN</p><div style="background: white; padding: 8px; border: 2px solid #0f172a; border-radius: 12px; display: inline-block; margin-bottom: 16px; box-shadow: 4px 4px 0px #cbd5e1;"><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://get.myfitapp.de/a/A4R6?p=5" style="width: 130px; height: 130px; display: block;"></div><div style="text-align: left; font-size: 13px; background: #f8fafc; padding: 12px 14px; border-radius: 8px; border: 1px solid #e2e8f0;"><p style="margin-bottom: 8px; font-weight: 700; text-transform: uppercase; font-size: 11px; color: #64748b; letter-spacing: 0.05em; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px;">How to join</p><ol style="margin: 0; padding-left: 16px; line-height: 1.5; font-weight: 500; color: #334155;"><li>Scan QR code to download app</li><li>Press <strong>Join Now</strong></li><li>Select your preferred centre</li><li>Choose your membership</li><li>Enter details to complete</li></ol></div></div>`
             },
             MaleChange: {
                 content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 8px;">Male Change</p><p style="font-size: 32px; font-weight: 700;">1450</p>`
@@ -295,32 +358,23 @@
             Aquatics: {
                 content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 4px;">Aquatics</p><p style="font-size: 20px; margin-bottom: 4px;">0151 934 2927</p><p style="font-size: 20px;">active.aquatics@sefton.gov.uk</p>`
             },
-            ActiveSeftonAppIOS: {
-                label: "App (iOS)",
-                content: `<p style="font-weight: 700; font-size: 22px; margin-bottom: 10px;">Active Sefton App</p><p style="font-size: 15px; font-weight: 600; margin-bottom: 8px;">iOS / Apple</p><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://apps.apple.com/gb/app/active-sefton/id6753793453" style="width: 140px; height: 140px; display: block; margin: 0 auto;">`
-            },
-            ActiveSeftonAppAndroid: {
-                label: "App (Android)",
-                content: `<p style="font-weight: 700; font-size: 22px; margin-bottom: 10px;">Active Sefton App</p><p style="font-size: 15px; font-weight: 600; margin-bottom: 8px;">Android / Google</p><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://play.google.com/store/apps/details?id=com.innovatise.seftoncouncil&pcampaignid=web_share" style="width: 140px; height: 140px; display: block; margin: 0 auto;">`
-            },
             Printouts: {
                 content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 8px;">Printouts</p><p style="font-size: 18px;">mdwprint.netlify.app</p>`
             }
         };
 
         const BUTTON_ORDER = [
-            'JoinOnline', 'MaleChange',
+            'JoinOnlineMyFitApp', 'MaleChange',
             'FemaleChange', 'SaunaSteam',
             'GymTimes', 'SmallPool',
             'AdultOnlySwims', 'OAPSwims',
             'Rhymetime', 'Retention',
-            'Aquatics', 'ActiveSeftonAppIOS',
-            'ActiveSeftonAppAndroid', 'Printouts'
+            'Aquatics', 'Printouts'
         ];
 
         window.addEventListener('DOMContentLoaded', () => {
             renderSidebar();
-            loadTemplate('JoinOnline');
+            loadTemplate('JoinOnlineMyFitApp');
         });
 
         function renderSidebar() {

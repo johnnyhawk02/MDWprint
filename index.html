@@ -78,13 +78,27 @@
             width: 340px;
             background: var(--bg-sidebar);
             border-right: 1px solid var(--border);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-content: start;
+            display: flex;
+            flex-direction: column;
             padding: 20px;
-            gap: 12px;
+            gap: 24px;
             overflow-y: auto;
             flex-shrink: 0;
+        }
+
+        .sidebar-group-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #64748b;
+            margin-bottom: 12px;
+            letter-spacing: 0.05em;
+        }
+
+        .sidebar-group-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
         }
 
         .sidebar-btn {
@@ -374,14 +388,27 @@
             }
         };
 
-        const BUTTON_ORDER = [
-            'JoinOnlineMyFitApp', 'BecomeMember',
-            'MaleChange', 'FemaleChange',
-            'SaunaSteam', 'GymTimes',
-            'SmallPool', 'HolidayPoolTimes',
-            'AdultOnlySwims', 'OAPSwims',
-            'Rhymetime', 'Retention',
-            'Aquatics', 'Printouts'
+        const SIDEBAR_GROUPS = [
+            {
+                title: "App & Online",
+                items: ['JoinOnlineMyFitApp', 'BecomeMember', 'Printouts']
+            },
+            {
+                title: "Door Codes",
+                items: ['MaleChange', 'FemaleChange', 'SaunaSteam']
+            },
+            {
+                title: "Swimming",
+                items: ['SmallPool', 'HolidayPoolTimes', 'AdultOnlySwims', 'OAPSwims']
+            },
+            {
+                title: "Activities & Gym",
+                items: ['GymTimes', 'Rhymetime']
+            },
+            {
+                title: "Contact Info",
+                items: ['Retention', 'Aquatics']
+            }
         ];
 
         window.addEventListener('DOMContentLoaded', () => {
@@ -391,15 +418,30 @@
 
         function renderSidebar() {
             const sidebar = document.getElementById('sidebar');
-            BUTTON_ORDER.forEach(key => {
-                if (TEMPLATES[key]) {
-                    const btn = document.createElement('div');
-                    btn.className = 'sidebar-btn';
-                    btn.innerText = TEMPLATES[key].label || key.replace(/([A-Z])/g, ' $1').trim(); 
-                    btn.onclick = () => loadTemplate(key);
-                    btn.id = `btn-${key}`;
-                    sidebar.appendChild(btn);
-                }
+            SIDEBAR_GROUPS.forEach(group => {
+                const groupDiv = document.createElement('div');
+                
+                const title = document.createElement('div');
+                title.className = 'sidebar-group-title';
+                title.innerText = group.title;
+                groupDiv.appendChild(title);
+
+                const grid = document.createElement('div');
+                grid.className = 'sidebar-group-grid';
+
+                group.items.forEach(key => {
+                    if (TEMPLATES[key]) {
+                        const btn = document.createElement('div');
+                        btn.className = 'sidebar-btn';
+                        btn.innerText = TEMPLATES[key].label || key.replace(/([A-Z])/g, ' $1').trim(); 
+                        btn.onclick = () => loadTemplate(key);
+                        btn.id = `btn-${key}`;
+                        grid.appendChild(btn);
+                    }
+                });
+
+                groupDiv.appendChild(grid);
+                sidebar.appendChild(groupDiv);
             });
         }
 

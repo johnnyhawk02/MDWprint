@@ -313,10 +313,6 @@
                 PRINT SLIP
             </button>
             <label class="checkbox-label">
-                <input type="checkbox" id="a4-3up-check">
-                A4 (3-UP)
-            </label>
-            <label class="checkbox-label">
                 <input type="checkbox" id="copy-check">
                 10x COPIES
             </label>
@@ -548,7 +544,6 @@
             const paper = document.getElementById('paper');
             const btn = document.getElementById('export-png-btn');
             const originalText = btn.innerHTML;
-            const isA43up = document.getElementById('a4-3up-check').checked;
             
             try {
                 btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> EXPORTING...`;
@@ -562,65 +557,72 @@
                     logging: false,
                 });
                 
-                let finalCanvas = baseCanvas;
+                // Create A4 Landscape Canvas at 300dpi (3508 x 2480)
+                let finalCanvas = document.createElement('canvas');
+                finalCanvas.width = 3508;
+                finalCanvas.height = 2480;
                 
-                if (isA43up) {
-                    // Create A4 Landscape Canvas at 300dpi (3508 x 2480)
-                    finalCanvas = document.createElement('canvas');
-                    finalCanvas.width = 3508;
-                    finalCanvas.height = 2480;
-                    
-                    const ctx = finalCanvas.getContext('2d');
-                    ctx.fillStyle = '#ffffff';
-                    ctx.fillRect(0, 0, finalCanvas.width, finalCanvas.height);
-                    
-                    // Available third-A4 area minus margins
-                    const margin = 100;
-                    const maxW = (finalCanvas.width / 3) - (margin * 2);
-                    const maxH = finalCanvas.height - (margin * 2);
-                    
-                    const scaleFactor = Math.min(maxW / baseCanvas.width, maxH / baseCanvas.height);
-                    
-                    const scaledW = baseCanvas.width * scaleFactor;
-                    const scaledH = baseCanvas.height * scaleFactor;
-                    
-                    // Draw first slip (left)
-                    const x1 = (finalCanvas.width / 6) - (scaledW / 2);
-                    const y = (finalCanvas.height / 2) - (scaledH / 2);
-                    
-                    ctx.setLineDash([20, 20]);
-                    ctx.strokeStyle = '#94a3b8';
-                    ctx.lineWidth = 4;
-                    ctx.strokeRect(x1 - 10, y - 10, scaledW + 20, scaledH + 20);
-                    ctx.drawImage(baseCanvas, x1, y, scaledW, scaledH);
-                    
-                    // Draw second slip (middle)
-                    const x2 = (finalCanvas.width / 2) - (scaledW / 2);
-                    
-                    ctx.strokeRect(x2 - 10, y - 10, scaledW + 20, scaledH + 20);
-                    ctx.drawImage(baseCanvas, x2, y, scaledW, scaledH);
-                    
-                    // Draw third slip (right)
-                    const x3 = (finalCanvas.width * 5 / 6) - (scaledW / 2);
-                    
-                    ctx.strokeRect(x3 - 10, y - 10, scaledW + 20, scaledH + 20);
-                    ctx.drawImage(baseCanvas, x3, y, scaledW, scaledH);
-                    
-                    // Draw cut lines
-                    ctx.beginPath();
-                    ctx.moveTo(finalCanvas.width / 3, 100);
-                    ctx.lineTo(finalCanvas.width / 3, finalCanvas.height - 100);
-                    ctx.stroke();
+                const ctx = finalCanvas.getContext('2d');
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, finalCanvas.width, finalCanvas.height);
+                
+                // Available fourth-A4 area minus margins
+                const margin = 80;
+                const maxW = (finalCanvas.width / 4) - (margin * 2);
+                const maxH = finalCanvas.height - (margin * 2);
+                
+                const scaleFactor = Math.min(maxW / baseCanvas.width, maxH / baseCanvas.height);
+                
+                const scaledW = baseCanvas.width * scaleFactor;
+                const scaledH = baseCanvas.height * scaleFactor;
+                
+                // Draw first slip
+                const x1 = (finalCanvas.width / 8) - (scaledW / 2);
+                const y = (finalCanvas.height / 2) - (scaledH / 2);
+                
+                ctx.setLineDash([20, 20]);
+                ctx.strokeStyle = '#94a3b8';
+                ctx.lineWidth = 4;
+                ctx.strokeRect(x1 - 10, y - 10, scaledW + 20, scaledH + 20);
+                ctx.drawImage(baseCanvas, x1, y, scaledW, scaledH);
+                
+                // Draw second slip
+                const x2 = (finalCanvas.width * 3 / 8) - (scaledW / 2);
+                
+                ctx.strokeRect(x2 - 10, y - 10, scaledW + 20, scaledH + 20);
+                ctx.drawImage(baseCanvas, x2, y, scaledW, scaledH);
+                
+                // Draw third slip
+                const x3 = (finalCanvas.width * 5 / 8) - (scaledW / 2);
+                
+                ctx.strokeRect(x3 - 10, y - 10, scaledW + 20, scaledH + 20);
+                ctx.drawImage(baseCanvas, x3, y, scaledW, scaledH);
+                
+                // Draw fourth slip
+                const x4 = (finalCanvas.width * 7 / 8) - (scaledW / 2);
+                
+                ctx.strokeRect(x4 - 10, y - 10, scaledW + 20, scaledH + 20);
+                ctx.drawImage(baseCanvas, x4, y, scaledW, scaledH);
+                
+                // Draw cut lines
+                ctx.beginPath();
+                ctx.moveTo(finalCanvas.width / 4, 100);
+                ctx.lineTo(finalCanvas.width / 4, finalCanvas.height - 100);
+                ctx.stroke();
 
-                    ctx.beginPath();
-                    ctx.moveTo(finalCanvas.width * 2 / 3, 100);
-                    ctx.lineTo(finalCanvas.width * 2 / 3, finalCanvas.height - 100);
-                    ctx.stroke();
-                }
+                ctx.beginPath();
+                ctx.moveTo(finalCanvas.width / 2, 100);
+                ctx.lineTo(finalCanvas.width / 2, finalCanvas.height - 100);
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.moveTo(finalCanvas.width * 3 / 4, 100);
+                ctx.lineTo(finalCanvas.width * 3 / 4, finalCanvas.height - 100);
+                ctx.stroke();
                 
                 const dataUrl = finalCanvas.toDataURL("image/png");
                 const link = document.createElement('a');
-                link.download = isA43up ? 'slip-export-a4.png' : 'slip-export.png';
+                link.download = 'slip-export-a4.png';
                 link.href = dataUrl;
                 link.click();
             } catch (err) {

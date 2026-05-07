@@ -179,17 +179,6 @@
             height: fit-content;
             position: relative;
         }
-        
-        #paper::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #ef4444, #f59e0b, #10b981, #3b82f6, #6366f1, #8b5cf6, #ec4899);
-            opacity: 0.8;
-        }
 
         /* EDITOR CONTENT STYLES */
         .editor-content {
@@ -233,6 +222,30 @@
             background-color: #1e293b;
             transform: translateY(-1px);
             box-shadow: var(--shadow-lg);
+        }
+
+        /* EXPORT BUTTON */
+        #export-png-btn {
+            background-color: white;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            box-shadow: var(--shadow-sm);
+        }
+
+        #export-png-btn:hover {
+            background-color: #f8fafc;
+            border-color: #cbd5e1;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
         }
         
         /* CHECKBOX */
@@ -291,11 +304,18 @@
         </div>
         
         <div id="toolbar-controls">
+            <button id="export-png-btn" onclick="handleExportPng()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                EXPORT PNG
+            </button>
             <button id="print-btn" onclick="handlePrint()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2-2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
                 PRINT SLIP
             </button>
-            
+            <label class="checkbox-label">
+                <input type="checkbox" id="a4-3up-check">
+                A4 (3-UP)
+            </label>
             <label class="checkbox-label">
                 <input type="checkbox" id="copy-check">
                 10x COPIES
@@ -354,6 +374,7 @@
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
         const ICONS = {
             smartphone: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>`,
@@ -370,7 +391,8 @@
             phone: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>`,
             lifebuoy: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"></line><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"></line><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"></line><line x1="14.83" y1="9.17" x2="18.36" y2="5.64"></line><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"></line></svg>`,
             printer: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2-2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>`,
-            ticket: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M13 5v2"></path><path d="M13 17v2"></path><path d="M13 11v2"></path></svg>`
+            ticket: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M13 5v2"></path><path d="M13 17v2"></path><path d="M13 11v2"></path></svg>`,
+            tag: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>`
         };
 
         const TEMPLATES = {
@@ -431,6 +453,11 @@
                 icon: ICONS.ticket,
                 content: `<div style="font-family: 'Inter', sans-serif; color: #0f172a;"><div style="margin-bottom: 20px;"><p style="font-weight: 600; font-size: 12px; color: #64748b; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em;">Meadows Leisure Centre</p><p style="font-weight: 900; font-size: 26px; line-height: 1; letter-spacing: -0.03em;">Free Class Pass</p></div><div style="text-align: left; width: 100%; padding: 0 10px; box-sizing: border-box; font-size: 14px;"><div style="display: flex; align-items: baseline; margin-bottom: 15px;"><span style="font-weight: 600; margin-right: 8px;">Class:</span><div style="flex-grow: 1; border-bottom: 1px dashed #000;">&nbsp;</div></div><div style="display: flex; align-items: baseline; margin-bottom: 15px;"><span style="font-weight: 600; margin-right: 8px;">Date:</span><div style="flex-grow: 1; border-bottom: 1px dashed #000;">&nbsp;</div><span style="font-weight: 600; margin: 0 8px;">Time:</span><div style="width: 50px; border-bottom: 1px dashed #000;">&nbsp;</div></div><div style="display: flex; align-items: baseline; margin-bottom: 15px;"><span style="font-weight: 600; margin-right: 8px;">Name:</span><div style="flex-grow: 1; border-bottom: 1px dashed #000;">&nbsp;</div></div><div style="display: flex; align-items: baseline; margin-bottom: 15px;"><span style="font-weight: 600; margin-right: 8px;">Authorized by:</span><div style="flex-grow: 1; border-bottom: 1px dashed #000;">&nbsp;</div></div></div></div>`
             },
+            MembershipPrices: {
+                label: "Prices",
+                icon: ICONS.tag,
+                content: `<div style="font-family: 'Inter', sans-serif; color: #0f172a;"><div style="margin-bottom: 16px;"><p style="font-weight: 900; font-size: 24px; margin-bottom: 4px; line-height: 1; letter-spacing: -0.03em;">Membership Prices</p><p style="font-size: 11px; font-weight: 500; color: #475569; margin-bottom: 0;">All contracts roll monthly after initial period</p></div><div style="margin-bottom: 12px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px;"><p style="font-weight: 700; font-size: 16px; margin-bottom: 4px; text-align: left;">Active Sefton Single</p><div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 2px;"><span style="font-weight: 500;">Committed (12mth)</span><span style="text-align: right;">£33/mth or £363/yr</span></div><div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="font-weight: 500;">Non-Committed (3mth min)</span><span style="text-align: right;">£43/mth</span></div></div><div style="margin-bottom: 12px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px;"><p style="font-weight: 700; font-size: 16px; margin-bottom: 2px; text-align: left;">Concession</p><p style="font-size: 11px; font-weight: 500; color: #475569; margin-top: 0; margin-bottom: 6px; line-height: 1.3;">Workforce, Referral, Student, Saver+</p><div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 2px;"><span style="font-weight: 500;">Committed (12mth)</span><span style="text-align: right;">£308/yr</span></div><div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;"><span style="font-weight: 500;">Non-Committed (3mth min)</span><span style="text-align: right;">£28/mth</span></div><p style="font-size: 13px; font-style: italic; color: #0f172a; margin-top: 0; margin-bottom: 0; text-align: left;">Saver+ has an additional £15 annual fee</p></div><div style="margin-bottom: 12px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px;"><p style="font-weight: 700; font-size: 16px; margin-bottom: 4px; text-align: left;">Corporate & Buddy</p><div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 2px;"><span style="font-weight: 500;">Committed (12mth)</span><span style="text-align: right;">£330/yr</span></div><div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="font-weight: 500;">Non-Committed (3mth min)</span><span style="text-align: right;">£30/mth</span></div></div><div style="margin-bottom: 12px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px;"><p style="font-weight: 700; font-size: 16px; margin-bottom: 4px; text-align: left;">Youth (11-16yrs)</p><div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 2px;"><span style="font-weight: 500;">Committed (12mth)</span><span style="text-align: right;">£220/yr</span></div><div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="font-weight: 500;">Non-Committed (3mth min)</span><span style="text-align: right;">£20/mth</span></div></div><div style="margin-bottom: 12px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px;"><p style="font-weight: 700; font-size: 16px; margin-bottom: 4px; text-align: left;">Swim (Adult)</p><div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 2px;"><span style="font-weight: 500;">Committed (12mth)</span><span style="text-align: right;">£297/yr</span></div><div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="font-weight: 500;">Non-Committed (3mth min)</span><span style="text-align: right;">£27/mth</span></div></div><div style="margin-bottom: 12px;"><p style="font-weight: 700; font-size: 16px; margin-bottom: 4px; text-align: left;">Swim (Junior 3-10)</p><div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 2px;"><span style="font-weight: 500;">Committed (12mth)</span><span style="text-align: right;">£187/yr</span></div><div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="font-weight: 500;">Non-Committed (3mth min)</span><span style="text-align: right;">£17/mth</span></div></div><div style="margin-top: 20px; border-top: 2px solid #e2e8f0; padding-top: 16px; text-align: center;"><p style="font-weight: 700; font-size: 14px; margin-bottom: 12px;">Ready to join?</p><img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://get.myfitapp.de/a/A4R6?p=5" style="width: 100px; height: 100px; display: block; margin: 0 auto 12px auto;"><p style="font-size: 12px; font-weight: 500; color: #475569; margin: 0; line-height: 1.4;">Scan to download our app<br>and become a member</p></div></div>`
+            },
             Retention: {
                 icon: ICONS.phone,
                 content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 4px;">Retention</p><p style="font-size: 20px; margin-bottom: 4px;">0151 934 2858</p><p style="font-size: 20px;">retention@sefton.gov.uk</p>`
@@ -460,7 +487,7 @@
             },
             {
                 title: "Activities & Gym",
-                items: ['GymTimes', 'Rhymetime', 'FreeClassPass']
+                items: ['GymTimes', 'Rhymetime', 'FreeClassPass', 'MembershipPrices']
             },
             {
                 title: "Contact Info",
@@ -517,10 +544,98 @@
             if (activeBtn) activeBtn.classList.add('active');
         }
 
+        async function handleExportPng() {
+            const paper = document.getElementById('paper');
+            const btn = document.getElementById('export-png-btn');
+            const originalText = btn.innerHTML;
+            const isA43up = document.getElementById('a4-3up-check').checked;
+            
+            try {
+                btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> EXPORTING...`;
+                btn.style.pointerEvents = 'none';
+                
+                // First capture the slip as normal (high res)
+                const baseCanvas = await html2canvas(paper, {
+                    scale: 4, 
+                    useCORS: true,
+                    backgroundColor: "#ffffff",
+                    logging: false,
+                });
+                
+                let finalCanvas = baseCanvas;
+                
+                if (isA43up) {
+                    // Create A4 Landscape Canvas at 300dpi (3508 x 2480)
+                    finalCanvas = document.createElement('canvas');
+                    finalCanvas.width = 3508;
+                    finalCanvas.height = 2480;
+                    
+                    const ctx = finalCanvas.getContext('2d');
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(0, 0, finalCanvas.width, finalCanvas.height);
+                    
+                    // Available third-A4 area minus margins
+                    const margin = 100;
+                    const maxW = (finalCanvas.width / 3) - (margin * 2);
+                    const maxH = finalCanvas.height - (margin * 2);
+                    
+                    const scaleFactor = Math.min(maxW / baseCanvas.width, maxH / baseCanvas.height);
+                    
+                    const scaledW = baseCanvas.width * scaleFactor;
+                    const scaledH = baseCanvas.height * scaleFactor;
+                    
+                    // Draw first slip (left)
+                    const x1 = (finalCanvas.width / 6) - (scaledW / 2);
+                    const y = (finalCanvas.height / 2) - (scaledH / 2);
+                    
+                    ctx.setLineDash([20, 20]);
+                    ctx.strokeStyle = '#94a3b8';
+                    ctx.lineWidth = 4;
+                    ctx.strokeRect(x1 - 10, y - 10, scaledW + 20, scaledH + 20);
+                    ctx.drawImage(baseCanvas, x1, y, scaledW, scaledH);
+                    
+                    // Draw second slip (middle)
+                    const x2 = (finalCanvas.width / 2) - (scaledW / 2);
+                    
+                    ctx.strokeRect(x2 - 10, y - 10, scaledW + 20, scaledH + 20);
+                    ctx.drawImage(baseCanvas, x2, y, scaledW, scaledH);
+                    
+                    // Draw third slip (right)
+                    const x3 = (finalCanvas.width * 5 / 6) - (scaledW / 2);
+                    
+                    ctx.strokeRect(x3 - 10, y - 10, scaledW + 20, scaledH + 20);
+                    ctx.drawImage(baseCanvas, x3, y, scaledW, scaledH);
+                    
+                    // Draw cut lines
+                    ctx.beginPath();
+                    ctx.moveTo(finalCanvas.width / 3, 100);
+                    ctx.lineTo(finalCanvas.width / 3, finalCanvas.height - 100);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(finalCanvas.width * 2 / 3, 100);
+                    ctx.lineTo(finalCanvas.width * 2 / 3, finalCanvas.height - 100);
+                    ctx.stroke();
+                }
+                
+                const dataUrl = finalCanvas.toDataURL("image/png");
+                const link = document.createElement('a');
+                link.download = isA43up ? 'slip-export-a4.png' : 'slip-export.png';
+                link.href = dataUrl;
+                link.click();
+            } catch (err) {
+                console.error("Error generating PNG:", err);
+                alert("Failed to generate PNG.");
+            } finally {
+                btn.innerHTML = originalText;
+                btn.style.pointerEvents = 'auto';
+            }
+        }
+
         function handlePrint() {
             const editorContent = document.getElementById('editor').innerHTML;
             const is10x = document.getElementById('copy-check').checked;
-            const printWindow = window.open('', '_blank', 'width=450,height=600');
+            const printWindow = window.open('', '_blank', 'width=800,height=600');
             
             if (!printWindow) {
                 alert("Pop-up blocked! Please allow pop-ups for this site to print.");
@@ -528,6 +643,7 @@
             }
 
             let printHTML = '';
+            
             const count = is10x ? 10 : 1;
             for (let i = 0; i < count; i++) {
                 printHTML += `<div class="slip-container">${editorContent}<div class="footer-mdw">-MDW-</div></div>`;
@@ -539,7 +655,9 @@
                 <head>
                     <title>Print Slip</title>
                     <style>
-                        @page { margin: 0; }
+                        @page { 
+                            margin: 0; 
+                        }
                         * { box-sizing: border-box; }
                         html, body { 
                             margin: 0 !important; 

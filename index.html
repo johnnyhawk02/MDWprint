@@ -274,26 +274,7 @@
             background: #f8fafc;
         }
 
-        /* GitHub Button */
-        #github-btn {
-            background-color: #24292e;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.2s;
-        }
-        
-        #github-btn:hover {
-            background-color: #1b1f23;
-            transform: translateY(-1px);
-        }
+
     </style>
 <link rel="stylesheet" href="/index.css">
 </head>
@@ -323,49 +304,11 @@
                 10x COPIES
             </label>
 
-            <button id="github-btn" onclick="startGitHubSync()" style="background-color: #24292e; color: white; border: none; padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; margin-left: auto;">
-                <svg height="20" width="20" viewBox="0 0 16 16" fill="white"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
-                Sync to GitHub
-            </button>
+
         </div>
     </div>
 
-    <!-- GitHub Sync Modal -->
-    <div id="gh-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
-        <div style="background: white; padding: 24px; border-radius: 12px; width: 400px; max-width: 90%; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
-            <h3 style="margin-top: 0;">Connect to GitHub</h3>
-            <div id="gh-step-1">
-                <p>1. Copy this code:</p>
-                <div id="gh-user-code" style="font-family: monospace; font-size: 24px; font-weight: bold; background: #f1f5f9; padding: 10px; border-radius: 6px; margin: 10px 0; letter-spacing: 2px;">...</div>
-                <p>2. Click the link below and paste the code:</p>
-                <a id="gh-verify-link" href="#" target="_blank" style="display: inline-block; background: #2563eb; color: white; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; margin: 10px 0;">Open GitHub Login</a>
-                <p style="font-size: 12px; color: #64748b; margin-top: 10px;">Waiting for authorization...</p>
-            </div>
-            <div id="gh-step-2" style="display: none;">
-                <p>Authorized! Pushing code to <strong>johnnyhawk02/MDWprint</strong>...</p>
-                <div style="width: 100%; height: 4px; background: #e2e8f0; margin-top: 10px; overflow: hidden; border-radius: 2px;">
-                    <div style="width: 50%; height: 100%; background: #2563eb; animation: loading 1s infinite linear;"></div>
-                </div>
-            </div>
-            <div id="gh-step-success" style="display: none;">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" style="margin: 0 auto 10px;">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                </svg>
-                <p style="font-weight: 600; font-size: 18px;">Successfully Pushed!</p>
-                <a id="gh-repo-link" href="#" target="_blank" style="color: #2563eb;">View Repository</a>
-                <button onclick="document.getElementById('gh-modal').style.display='none'" style="display: block; width: 100%; margin-top: 20px; padding: 10px; background: #f1f5f9; border: none; border-radius: 6px; cursor: pointer;">Close</button>
-            </div>
-            <div id="gh-step-error" style="display: none;">
-                <p style="color: #ef4444; font-weight: 600;">Error</p>
-                <p id="gh-error-msg" style="font-size: 14px;"></p>
-                <button onclick="document.getElementById('gh-modal').style.display='none'" style="margin-top: 10px; padding: 8px 16px;">Close</button>
-            </div>
-        </div>
-    </div>
-    <style>
-        @keyframes loading { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
-    </style>
+
 
     <div id="main-container">
         <div id="sidebar"></div>
@@ -394,7 +337,8 @@
             lifebuoy: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"></line><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"></line><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"></line><line x1="14.83" y1="9.17" x2="18.36" y2="5.64"></line><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"></line></svg>`,
             printer: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2-2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>`,
             ticket: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M13 5v2"></path><path d="M13 17v2"></path><path d="M13 11v2"></path></svg>`,
-            tag: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>`
+            tag: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>`,
+            alertTriangle: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>`
         };
 
         const TEMPLATES = {
@@ -471,6 +415,15 @@
             Printouts: {
                 icon: ICONS.printer,
                 content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 8px;">Printouts</p><p style="font-size: 18px;">mdwprint.netlify.app</p><p style="font-size: 18px;">press SHIFT + ALT + P</p>`
+            },
+            OutOfOrder: {
+                icon: ICONS.alertTriangle,
+                content: `<div style="writing-mode: vertical-rl; text-orientation: mixed; text-align: center; padding: 120px 0; margin: 0 auto; font-family: 'Inter', sans-serif;"><p style="font-weight: 900; font-size: 52px; margin: 0; text-transform: uppercase; letter-spacing: 5px;">OUT OF ORDER</p><p style="font-weight: 600; font-size: 20px; margin: 0; margin-right: 30px; color: #334155; letter-spacing: 1px;">MANAGER NOTIFIED:<br>{{DATETIME}}</p></div>`
+            },
+            CashOrBandsOnly: {
+                icon: ICONS.coins,
+                label: "Cash/Bands Only",
+                content: `<div style="writing-mode: vertical-rl; text-orientation: mixed; text-align: center; padding: 50px 0; margin: 0 auto; font-family: 'Inter', sans-serif; white-space: nowrap;"><p style="font-weight: 400; font-size: 36px; margin: 0; letter-spacing: 1px;"><strong style="font-weight: 900;">BANDS</strong> and/or <strong style="font-weight: 900;">CASH ONLY</strong><br>At this Till</p></div>`
             }
         };
 
@@ -478,6 +431,10 @@
             {
                 title: "App & Online",
                 items: ['JoinOnlineMyFitApp', 'BecomeMember', 'Printouts']
+            },
+            {
+                title: "Notices",
+                items: ['OutOfOrder', 'CashOrBandsOnly']
             },
             {
                 title: "Door Codes",
@@ -540,7 +497,16 @@
 
         function loadTemplate(key) {
             const editor = document.getElementById('editor');
-            editor.innerHTML = TEMPLATES[key].content;
+            
+            let content = TEMPLATES[key].content;
+            if (content.includes('{{DATETIME}}')) {
+                const now = new Date();
+                const dateStr = now.toLocaleDateString('en-GB'); // DD/MM/YYYY
+                const timeStr = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+                content = content.replace('{{DATETIME}}', `${dateStr} ${timeStr}`);
+            }
+            
+            editor.innerHTML = content;
             document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
             const activeBtn = document.getElementById(`btn-${key}`);
             if (activeBtn) activeBtn.classList.add('active');
@@ -736,133 +702,7 @@
             printWindow.document.close();
         }
 
-        async function startGitHubSync() {
-            const modal = document.getElementById('gh-modal');
-            const step1 = document.getElementById('gh-step-1');
-            const step2 = document.getElementById('gh-step-2');
-            const stepSuccess = document.getElementById('gh-step-success');
-            const stepError = document.getElementById('gh-step-error');
-            const statusText = document.querySelector('#gh-step-1 p:last-child');
-            
-            modal.style.display = 'flex';
-            step1.style.display = 'block';
-            step2.style.display = 'none';
-            stepSuccess.style.display = 'none';
-            stepError.style.display = 'none';
 
-            try {
-                // 1. Request Device Code
-                statusText.innerText = "Connecting to GitHub...";
-                const res = await fetch('/api/github/device-code', { method: 'POST' });
-                if (!res.ok) throw new Error('Failed to connect to server');
-                const data = await res.json();
-                
-                if (data.error) throw new Error(data.error);
-
-                document.getElementById('gh-user-code').innerText = data.user_code;
-                const verifyLink = document.getElementById('gh-verify-link');
-                verifyLink.href = data.verification_uri;
-                
-                statusText.innerText = "Waiting for authorization...";
-
-                // 2. Poll for Token (Recursive)
-                const intervalMs = (data.interval || 5) * 1000;
-                let isPolling = true;
-
-                // Stop polling if modal is closed
-                const closeModal = () => {
-                    isPolling = false;
-                    modal.style.display = 'none';
-                };
-                
-                // Override close buttons to stop polling
-                const closeBtns = modal.querySelectorAll('button');
-                closeBtns.forEach(btn => {
-                    const oldOnClick = btn.onclick;
-                    btn.onclick = (e) => {
-                        isPolling = false;
-                        if (oldOnClick) oldOnClick(e);
-                        else modal.style.display = 'none';
-                    };
-                });
-
-                const poll = async () => {
-                    if (!isPolling) return;
-
-                    try {
-                        const pollRes = await fetch('/api/github/poll-token', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ device_code: data.device_code })
-                        });
-                        
-                        if (!pollRes.ok) {
-                             // If server error, retry after delay
-                             if (isPolling) setTimeout(poll, intervalMs);
-                             return;
-                        }
-
-                        const pollData = await pollRes.json();
-
-                        if (pollData.access_token) {
-                            isPolling = false;
-                            step1.style.display = 'none';
-                            step2.style.display = 'block';
-                            pushCode(pollData.access_token);
-                        } else if (pollData.error === 'authorization_pending') {
-                            if (isPolling) setTimeout(poll, intervalMs);
-                        } else if (pollData.error === 'slow_down') {
-                            if (isPolling) setTimeout(poll, intervalMs + 5000);
-                        } else {
-                            isPolling = false;
-                            showError(pollData.error_description || pollData.error);
-                        }
-                    } catch (err) {
-                        console.error("Poll error", err);
-                        // Retry on network error
-                        if (isPolling) setTimeout(poll, intervalMs);
-                    }
-                };
-                
-                setTimeout(poll, intervalMs);
-
-            } catch (err) {
-                showError(err.message);
-            }
-        }
-
-        async function pushCode(token) {
-            try {
-                const res = await fetch('/api/github/push', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ token })
-                });
-                const data = await res.json();
-
-                if (data.error) throw new Error(data.error);
-
-                document.getElementById('gh-step-2').style.display = 'none';
-                document.getElementById('gh-step-success').style.display = 'block';
-                document.getElementById('gh-repo-link').href = data.repoUrl;
-
-            } catch (err) {
-                showError(err.message);
-            }
-        }
-
-        function showError(msg) {
-            document.getElementById('gh-step-1').style.display = 'none';
-            document.getElementById('gh-step-2').style.display = 'none';
-            document.getElementById('gh-step-error').style.display = 'block';
-            document.getElementById('gh-error-msg').innerText = msg;
-        }
-
-        // Hide GitHub Sync button on production site
-        if (window.location.hostname === 'mdwprint.netlify.app') {
-            const ghBtn = document.getElementById('github-btn');
-            if (ghBtn) ghBtn.style.display = 'none';
-        }
     </script>
 </body>
 </html>

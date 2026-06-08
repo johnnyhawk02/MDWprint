@@ -338,7 +338,8 @@
             printer: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2-2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>`,
             ticket: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M13 5v2"></path><path d="M13 17v2"></path><path d="M13 11v2"></path></svg>`,
             tag: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>`,
-            alertTriangle: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>`
+            alertTriangle: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>`,
+            globe: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>`
         };
 
         const TEMPLATES = {
@@ -429,13 +430,23 @@
                 icon: ICONS.waves,
                 label: "Water",
                 content: `<div style="writing-mode: vertical-rl; text-orientation: mixed; text-align: center; padding: 30px 0; margin: 0 auto; font-family: 'Inter', sans-serif; white-space: nowrap;"><p style="font-weight: 800; font-size: 42px; margin: 0; letter-spacing: 1px;">If you want water,</p><p style="font-weight: 700; font-size: 38px; margin: 0; margin-right: 15px;">it's £1 a bottle.</p><p style="font-weight: 500; font-size: 32px; margin: 0; margin-right: 15px; color: #334155;">Please ask at reception.</p></div>`
+            },
+            ActiveAquaticsQR: {
+                icon: ICONS.lifebuoy,
+                label: "Active Aquatics QR",
+                content: `<div style="text-align: center; padding: 20px 0; margin: 0 auto; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important;"><div style="display: flex !important; flex-direction: column !important; align-items: center !important; margin: 0; padding: 12px; background: white; border-radius: 8px; border: 1px solid #cbd5e1; width: fit-content; box-shadow: var(--shadow-sm);"><img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://www.activeseftonfitness.co.uk/activeaquatics" style="width: 180px; height: 180px; display: block; margin: 0 auto;" alt="Active Aquatics QR"><div class="no-print" data-html2canvas-ignore="true" contenteditable="false" style="margin-top: 10px; text-align: center;"><button onclick="downloadActiveAquaticsQR()" style="background-color: #2563eb; color: white; border: none; padding: 6px 14px; border-radius: 6px; font-size: 11px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; outline: none; transition: background-color 0.2s; font-family: sans-serif;"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>Download QR</button></div></div></div>`
+            },
+            OurWebsiteQR: {
+                icon: ICONS.globe,
+                label: "Our Website",
+                content: `<div style="text-align: center; padding: 20px 0; margin: 0 auto; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important;"><div style="display: flex !important; flex-direction: column !important; align-items: center !important; margin: 0; padding: 12px; background: white; border-radius: 8px; border: 1px solid #cbd5e1; width: fit-content; box-shadow: var(--shadow-sm);"><p style="font-weight: 800; font-size: 20px; margin-bottom: 8px; text-transform: uppercase;">Our Website</p><img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://www.activeseftonfitness.co.uk/" style="width: 180px; height: 180px; display: block; margin: 0 auto;" alt="Our Website QR"><p style="font-weight: 600; font-size: 14px; margin-top: 8px; margin-bottom: 0;">activeseftonfitness.co.uk</p><div class="no-print" data-html2canvas-ignore="true" contenteditable="false" style="margin-top: 10px; text-align: center;"><button onclick="downloadOurWebsiteQR()" style="background-color: #2563eb; color: white; border: none; padding: 6px 14px; border-radius: 6px; font-size: 11px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; outline: none; transition: background-color 0.2s; font-family: sans-serif;"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>Download QR</button></div></div></div>`
             }
         };
 
         const SIDEBAR_GROUPS = [
             {
                 title: "App & Online",
-                items: ['JoinOnlineMyFitApp', 'BecomeMember', 'Printouts']
+                items: ['JoinOnlineMyFitApp', 'BecomeMember', 'OurWebsiteQR', 'ActiveAquaticsQR', 'Printouts']
             },
             {
                 title: "Notices",
@@ -447,7 +458,7 @@
             },
             {
                 title: "Swimming",
-                items: ['SmallPool', 'HolidayPoolTimes', 'AdultOnlySwims', 'OAPSwims']
+                items: ['SmallPool', 'HolidayPoolTimes', 'AdultOnlySwims', 'OAPSwims', 'ActiveAquaticsQR']
             },
             {
                 title: "Activities & Gym",
@@ -610,6 +621,44 @@
             }
         }
 
+        async function downloadActiveAquaticsQR() {
+            try {
+                const response = await fetch("https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://www.activeseftonfitness.co.uk/activeaquatics");
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = 'Active_Aquatics_QR.png';
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                a.remove();
+            } catch (err) {
+                // Fallback: open in new tab
+                window.open("https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://www.activeseftonfitness.co.uk/activeaquatics", "_blank");
+            }
+        }
+
+        async function downloadOurWebsiteQR() {
+            try {
+                const response = await fetch("https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://www.activeseftonfitness.co.uk/");
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = 'Our_Website_QR.png';
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                a.remove();
+            } catch (err) {
+                // Fallback: open in new tab
+                window.open("https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://www.activeseftonfitness.co.uk/", "_blank");
+            }
+        }
+
         function handlePrint() {
             const editorContent = document.getElementById('editor').innerHTML;
             const is10x = document.getElementById('copy-check').checked;
@@ -633,6 +682,9 @@
                 <head>
                     <title>Print Slip</title>
                     <style>
+                        .no-print {
+                            display: none !important;
+                        }
                         @page { 
                             margin: 0; 
                         }

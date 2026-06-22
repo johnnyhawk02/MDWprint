@@ -441,9 +441,12 @@
             loadTemplate('JoinOnlineMyFitApp');
         });
 
+        const DEFAULT_FAVORITES = ['Aquatics', 'BecomeMember', 'OAPSwims', 'MembershipPrices', 'Retention', 'SmallPool'];
+
         function toggleFavorite(key, e) {
             e.stopPropagation();
-            let favorites = JSON.parse(localStorage.getItem('sefton_favorites')) || [];
+            let favorites = JSON.parse(localStorage.getItem('sefton_favorites'));
+            if (!favorites) favorites = DEFAULT_FAVORITES;
             if (favorites.includes(key)) {
                 favorites = favorites.filter(k => k !== key);
             } else {
@@ -454,7 +457,8 @@
         }
 
         function getSortedSidebarItems() {
-            const favorites = JSON.parse(localStorage.getItem('sefton_favorites')) || [];
+            let favorites = JSON.parse(localStorage.getItem('sefton_favorites'));
+            if (!favorites) favorites = DEFAULT_FAVORITES;
             const items = SIDEBAR_ITEMS.map(key => ({
                 key,
                 label: (TEMPLATES[key].label || key.replace(/([A-Z])/g, ' $1').trim()),

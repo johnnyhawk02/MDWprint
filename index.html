@@ -324,11 +324,17 @@
             ticket: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M13 5v2"></path><path d="M13 17v2"></path><path d="M13 11v2"></path></svg>`,
             tag: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>`,
             alertTriangle: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>`,
-            globe: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>`
+            globe: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>`,
+            pen: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path></svg>`
         };
 
         const TEMPLATES = {
 
+            PleaseSign: {
+                label: "Please Sign -->",
+                icon: ICONS.pen,
+                content: `<div style="writing-mode: vertical-rl; text-orientation: mixed; text-align: center; padding: 40px 0; margin: 0 auto; font-family: 'Inter', sans-serif; white-space: nowrap; display: block; height: 100%;"><div style="margin-right: 16px;"><span style="font-weight: 800; font-size: 56px; letter-spacing: 1px; color: #0f172a; vertical-align: middle;">Please Sign</span><svg style="transform: rotate(90deg); vertical-align: middle; margin-top: -12px;" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div><div style="margin-right: 16px; margin-top: 8px;"><span style="font-weight: 600; font-size: 28px; color: #334155;">Petition for new Padel Court</span></div></div>`
+            },
             JoinOnlineMyFitApp: {
                 label: "Sefton Active App",
                 icon: ICONS.smartphone,
@@ -431,7 +437,7 @@
         };
 
         const SIDEBAR_ITEMS = [
-            'JoinOnlineMyFitApp', 'BecomeMember', 'PoolClassesQR', 'ActiveAquaticsQR',
+            'PleaseSign', 'JoinOnlineMyFitApp', 'BecomeMember', 'PoolClassesQR', 'ActiveAquaticsQR',
             'GymTimes', 'Rhymetime', 'FreeClassPass', 'MembershipPrices', 'SmallPool', 
             'HolidayPoolTimes', 'AdultOnlySwims', 'OAPSwims', 'OutOfOrder', 'CashOrBandsOnly', 
             'WaterReception', 'MaleChange', 'FemaleChange', 'SaunaSteam', 'Retention', 

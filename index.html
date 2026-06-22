@@ -84,78 +84,63 @@
             flex-grow: 1;
             background: var(--bg-sidebar);
             border-right: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            padding: 16px;
-            gap: 16px;
-            overflow-y: auto;
-        }
-
-        .sidebar-group-title {
-            font-size: 12px;
-            text-transform: uppercase;
-            font-weight: 700;
-            color: #64748b;
-            margin-bottom: 8px;
-            letter-spacing: 0.05em;
-        }
-
-        .sidebar-group-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: min-content;
+            padding: 16px;
+            gap: 8px;
+            overflow-y: auto;
+            align-content: start;
         }
 
         .sidebar-btn {
             background: white;
             color: var(--text-secondary);
             border: 1px solid var(--border);
-            padding: 10px 12px;
-            text-align: left;
-            border-radius: 8px;
+            padding: 12px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 500;
-            transition: all 0.2s ease;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: flex-start;
-            gap: 8px;
+            transition: all 0.1s ease;
+            text-align: left;
+            line-height: 1.3;
             box-shadow: var(--shadow-sm);
-            min-height: 48px;
-            line-height: 1.2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .sidebar-btn svg {
-            width: 18px;
-            height: 18px;
-            opacity: 0.7;
-            transition: all 0.2s ease;
+        .star-icon {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            color: #cbd5e1;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            transition: all 0.2s;
             flex-shrink: 0;
+            margin-left: 8px;
         }
-
-        .sidebar-btn:hover svg {
-            opacity: 1;
-            transform: scale(1.05);
+        .star-icon:hover {
+            color: #fbbf24;
         }
-
-        .sidebar-btn.active svg {
-            opacity: 1;
+        .star-icon.active {
+            color: #fbbf24;
+            fill: #fbbf24;
         }
 
         .sidebar-btn:hover {
-            border-color: var(--accent);
+            background: #f1f5f9;
             color: var(--accent);
-            background: #eff6ff;
-            transform: translateY(-1px);
+            border-color: var(--accent);
         }
 
         .sidebar-btn.active {
-            background: var(--accent);
-            color: white;
+            background: #e0f2fe;
+            color: var(--accent);
             border-color: var(--accent);
-            box-shadow: var(--shadow-md);
             font-weight: 600;
         }
 
@@ -436,38 +421,19 @@
                 label: "Active Aquatics QR",
                 content: `<div style="text-align: center; padding: 20px 0; margin: 0 auto; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important;"><div style="display: flex !important; flex-direction: column !important; align-items: center !important; margin: 0; padding: 12px; background: white; border-radius: 8px; border: 1px solid #cbd5e1; width: fit-content; box-shadow: var(--shadow-sm);"><img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://www.activeseftonfitness.co.uk/activeaquatics" style="width: 180px; height: 180px; display: block; margin: 0 auto;" alt="Active Aquatics QR"><div class="no-print" data-html2canvas-ignore="true" contenteditable="false" style="margin-top: 10px; text-align: center;"><button onclick="downloadActiveAquaticsQR()" style="background-color: #2563eb; color: white; border: none; padding: 6px 14px; border-radius: 6px; font-size: 11px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; outline: none; transition: background-color 0.2s; font-family: sans-serif;"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>Download QR</button></div></div></div>`
             },
-            OurWebsiteQR: {
+            PoolClassesQR: {
                 icon: ICONS.globe,
-                label: "Our Website",
-                content: `<div style="text-align: center; padding: 20px 0; margin: 0 auto; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important;"><div style="display: flex !important; flex-direction: column !important; align-items: center !important; margin: 0; padding: 12px; background: white; border-radius: 8px; border: 1px solid #cbd5e1; width: fit-content; box-shadow: var(--shadow-sm);"><p style="font-weight: 800; font-size: 20px; margin-bottom: 8px; text-transform: uppercase;">Our Website</p><img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://www.activeseftonfitness.co.uk/" style="width: 180px; height: 180px; display: block; margin: 0 auto;" alt="Our Website QR"><p style="font-weight: 600; font-size: 14px; margin-top: 8px; margin-bottom: 0;">activeseftonfitness.co.uk</p><div class="no-print" data-html2canvas-ignore="true" contenteditable="false" style="margin-top: 10px; text-align: center;"><button onclick="downloadOurWebsiteQR()" style="background-color: #2563eb; color: white; border: none; padding: 6px 14px; border-radius: 6px; font-size: 11px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; outline: none; transition: background-color 0.2s; font-family: sans-serif;"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>Download QR</button></div></div></div>`
+                label: "Pool & Class Times",
+                content: `<div style="font-family: 'Inter', sans-serif; color: #0f172a; padding: 8px;"><div style="margin-bottom: 24px; text-align: center;"><p style="font-weight: 900; font-size: 24px; margin-bottom: 6px; line-height: 1.1; letter-spacing: -0.02em;">Meadows</p><p style="font-weight: 600; font-size: 16px; color: #475569; margin: 0;">Pool &amp; Class Times</p></div><img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://www.activeseftonfitness.co.uk/meadows-leisure-centre" style="width: 100px; height: 100px; display: block; margin: 0 auto;" alt="Pool & Class Times QR"></div>`
             }
         };
 
-        const SIDEBAR_GROUPS = [
-            {
-                title: "App & Online",
-                items: ['JoinOnlineMyFitApp', 'BecomeMember', 'OurWebsiteQR', 'ActiveAquaticsQR', 'Printouts']
-            },
-            {
-                title: "Notices",
-                items: ['OutOfOrder', 'CashOrBandsOnly', 'WaterReception']
-            },
-            {
-                title: "Door Codes",
-                items: ['MaleChange', 'FemaleChange', 'SaunaSteam']
-            },
-            {
-                title: "Swimming",
-                items: ['SmallPool', 'HolidayPoolTimes', 'AdultOnlySwims', 'OAPSwims', 'ActiveAquaticsQR']
-            },
-            {
-                title: "Activities & Gym",
-                items: ['GymTimes', 'Rhymetime', 'FreeClassPass', 'MembershipPrices']
-            },
-            {
-                title: "Contact Info",
-                items: ['Retention', 'Aquatics']
-            }
+        const SIDEBAR_ITEMS = [
+            'JoinOnlineMyFitApp', 'BecomeMember', 'PoolClassesQR', 'ActiveAquaticsQR',
+            'GymTimes', 'Rhymetime', 'FreeClassPass', 'MembershipPrices', 'SmallPool', 
+            'HolidayPoolTimes', 'AdultOnlySwims', 'OAPSwims', 'OutOfOrder', 'CashOrBandsOnly', 
+            'WaterReception', 'MaleChange', 'FemaleChange', 'SaunaSteam', 'Retention', 
+            'Aquatics', 'Printouts'
         ];
 
         window.addEventListener('DOMContentLoaded', () => {
@@ -475,43 +441,74 @@
             loadTemplate('JoinOnlineMyFitApp');
         });
 
+        function toggleFavorite(key, e) {
+            e.stopPropagation();
+            let favorites = JSON.parse(localStorage.getItem('sefton_favorites')) || [];
+            if (favorites.includes(key)) {
+                favorites = favorites.filter(k => k !== key);
+            } else {
+                favorites.push(key);
+            }
+            localStorage.setItem('sefton_favorites', JSON.stringify(favorites));
+            renderSidebar();
+        }
+
+        function getSortedSidebarItems() {
+            const favorites = JSON.parse(localStorage.getItem('sefton_favorites')) || [];
+            const items = SIDEBAR_ITEMS.map(key => ({
+                key,
+                label: (TEMPLATES[key].label || key.replace(/([A-Z])/g, ' $1').trim()),
+                isFavorite: favorites.includes(key)
+            }));
+
+            items.sort((a, b) => {
+                if (a.isFavorite === b.isFavorite) {
+                    return a.label.localeCompare(b.label);
+                }
+                return a.isFavorite ? -1 : 1;
+            });
+            return items;
+        }
+
         function renderSidebar() {
             const sidebar = document.getElementById('sidebar');
-            SIDEBAR_GROUPS.forEach(group => {
-                const groupDiv = document.createElement('div');
-                
-                const title = document.createElement('div');
-                title.className = 'sidebar-group-title';
-                title.innerText = group.title;
-                groupDiv.appendChild(title);
-
-                const grid = document.createElement('div');
-                grid.className = 'sidebar-group-grid';
-
-                group.items.forEach(key => {
-                    if (TEMPLATES[key]) {
-                        const btn = document.createElement('div');
-                        btn.className = 'sidebar-btn';
-                        
-                        let innerHtml = '';
-                        if (TEMPLATES[key].icon) {
-                            innerHtml += TEMPLATES[key].icon;
-                        }
-                        innerHtml += `<span>${TEMPLATES[key].label || key.replace(/([A-Z])/g, ' $1').trim()}</span>`;
-                        
-                        btn.innerHTML = innerHtml;
-                        btn.onclick = () => loadTemplate(key);
-                        btn.id = `btn-${key}`;
-                        grid.appendChild(btn);
-                    }
-                });
-
-                groupDiv.appendChild(grid);
-                sidebar.appendChild(groupDiv);
+            sidebar.innerHTML = '';
+            
+            const sortedItems = getSortedSidebarItems();
+            
+            sortedItems.forEach(item => {
+                const key = item.key;
+                if (TEMPLATES[key]) {
+                    const btn = document.createElement('div');
+                    btn.className = 'sidebar-btn';
+                    
+                    const labelSpan = document.createElement('span');
+                    labelSpan.textContent = item.label;
+                    
+                    const starSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                    starSvg.setAttribute('viewBox', '0 0 24 24');
+                    starSvg.setAttribute('class', `star-icon ${item.isFavorite ? 'active' : ''}`);
+                    starSvg.innerHTML = `<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>`;
+                    
+                    starSvg.onclick = (e) => toggleFavorite(key, e);
+                    
+                    btn.appendChild(labelSpan);
+                    btn.appendChild(starSvg);
+                    
+                    btn.onclick = () => loadTemplate(key);
+                    btn.id = `btn-${key}`;
+                    sidebar.appendChild(btn);
+                }
             });
+            
+            if (window.currentActiveKey) {
+                const activeBtn = document.getElementById(`btn-${window.currentActiveKey}`);
+                if (activeBtn) activeBtn.classList.add('active');
+            }
         }
 
         function loadTemplate(key) {
+            window.currentActiveKey = key;
             const editor = document.getElementById('editor');
             
             let content = TEMPLATES[key].content;
@@ -637,25 +634,6 @@
             } catch (err) {
                 // Fallback: open in new tab
                 window.open("https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://www.activeseftonfitness.co.uk/activeaquatics", "_blank");
-            }
-        }
-
-        async function downloadOurWebsiteQR() {
-            try {
-                const response = await fetch("https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://www.activeseftonfitness.co.uk/");
-                const blob = await response.blob();
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.style.display = 'none';
-                a.href = url;
-                a.download = 'Our_Website_QR.png';
-                document.body.appendChild(a);
-                a.click();
-                window.URL.revokeObjectURL(url);
-                a.remove();
-            } catch (err) {
-                // Fallback: open in new tab
-                window.open("https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://www.activeseftonfitness.co.uk/", "_blank");
             }
         }
 

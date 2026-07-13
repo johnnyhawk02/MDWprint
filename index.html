@@ -560,64 +560,159 @@
             });
             
             if (hasHidden) {
-                const restoreContainer = document.createElement('div');
-                restoreContainer.style.marginTop = '16px';
-                
                 const restoreBtn = document.createElement('button');
                 restoreBtn.className = 'restore-btn';
-                restoreBtn.style.marginTop = '0';
+                restoreBtn.style.marginTop = '16px';
                 restoreBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Restore Hidden`;
                 
-                const restoreList = document.createElement('div');
-                restoreList.style.display = 'none';
-                restoreList.style.flexDirection = 'column';
-                restoreList.style.gap = '4px';
-                restoreList.style.marginTop = '8px';
-                
-                hiddenItems.forEach(key => {
-                    const template = TEMPLATES[key];
-                    if (!template) return;
-                    const itemBtn = document.createElement('div');
-                    itemBtn.className = 'sidebar-btn';
-                    itemBtn.style.opacity = '0.7';
-                    itemBtn.style.paddingLeft = '8px';
-                    itemBtn.style.paddingRight = '8px';
-                    itemBtn.style.fontSize = '13px';
-                    
-                    const labelSpan = document.createElement('span');
-                    labelSpan.textContent = template.label || key;
-                    
-                    const restoreAction = document.createElement('span');
-                    restoreAction.textContent = 'Restore';
-                    restoreAction.style.fontSize = '11px';
-                    restoreAction.style.fontWeight = '600';
-                    restoreAction.style.color = '#3b82f6';
-                    restoreAction.style.cursor = 'pointer';
-                    
-                    itemBtn.appendChild(labelSpan);
-                    itemBtn.appendChild(restoreAction);
-                    
-                    itemBtn.onclick = () => {
-                        hiddenItems = hiddenItems.filter(k => k !== key);
-                        localStorage.setItem('hiddenTemplates', JSON.stringify(hiddenItems));
-                        renderSidebar();
-                    };
-                    restoreList.appendChild(itemBtn);
-                });
-
                 restoreBtn.onclick = () => {
-                    restoreList.style.display = restoreList.style.display === 'none' ? 'flex' : 'none';
+                    showRestoreOverlay();
                 };
                 
-                restoreContainer.appendChild(restoreBtn);
-                restoreContainer.appendChild(restoreList);
-                sidebar.appendChild(restoreContainer);
+                sidebar.appendChild(restoreBtn);
             }
             
             if (window.currentActiveKey) {
                 const activeBtn = document.getElementById(`btn-${window.currentActiveKey}`);
                 if (activeBtn) activeBtn.classList.add('active');
             }
+        }
+
+        function showRestoreOverlay() {
+            if (document.getElementById('restore-overlay')) {
+                document.getElementById('restore-overlay').remove();
+            }
+
+            const overlay = document.createElement('div');
+            overlay.id = 'restore-overlay';
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100vw';
+            overlay.style.height = '100vh';
+            overlay.style.backgroundColor = 'rgba(15, 23, 42, 0.5)';
+            overlay.style.display = 'flex';
+            overlay.style.alignItems = 'center';
+            overlay.style.justifyContent = 'center';
+            overlay.style.zIndex = '1000';
+            overlay.style.backdropFilter = 'blur(2px)';
+
+            const modal = document.createElement('div');
+            modal.style.background = '#ffffff';
+            modal.style.borderRadius = '12px';
+            modal.style.padding = '24px';
+            modal.style.width = '400px';
+            modal.style.maxWidth = '90%';
+            modal.style.boxShadow = '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)';
+            modal.style.display = 'flex';
+            modal.style.flexDirection = 'column';
+            modal.style.gap = '16px';
+
+            const header = document.createElement('div');
+            header.style.display = 'flex';
+            header.style.justifyContent = 'space-between';
+            header.style.alignItems = 'center';
+
+            const title = document.createElement('h3');
+            title.textContent = 'Restore Hidden Buttons';
+            title.style.margin = '0';
+            title.style.fontSize = '18px';
+            title.style.fontWeight = '600';
+            title.style.color = '#0f172a';
+
+            const closeBtn = document.createElement('button');
+            closeBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+            closeBtn.style.background = 'none';
+            closeBtn.style.border = 'none';
+            closeBtn.style.cursor = 'pointer';
+            closeBtn.style.color = '#64748b';
+            closeBtn.style.padding = '4px';
+            closeBtn.style.display = 'flex';
+            closeBtn.style.alignItems = 'center';
+            closeBtn.style.justifyContent = 'center';
+            closeBtn.style.borderRadius = '4px';
+            closeBtn.onmouseover = () => closeBtn.style.background = '#f1f5f9';
+            closeBtn.onmouseout = () => closeBtn.style.background = 'none';
+            closeBtn.onclick = () => overlay.remove();
+
+            header.appendChild(title);
+            header.appendChild(closeBtn);
+            modal.appendChild(header);
+
+            const listContainer = document.createElement('div');
+            listContainer.style.display = 'flex';
+            listContainer.style.flexDirection = 'column';
+            listContainer.style.gap = '8px';
+            listContainer.style.maxHeight = '50vh';
+            listContainer.style.overflowY = 'auto';
+
+            if (hiddenItems.length === 0) {
+                const emptyText = document.createElement('p');
+                emptyText.textContent = 'No hidden buttons.';
+                emptyText.style.color = '#64748b';
+                emptyText.style.fontSize = '14px';
+                emptyText.style.textAlign = 'center';
+                emptyText.style.margin = '20px 0';
+                listContainer.appendChild(emptyText);
+            } else {
+                hiddenItems.forEach(key => {
+                    const template = TEMPLATES[key];
+                    if (!template) return;
+                    
+                    const itemDiv = document.createElement('div');
+                    itemDiv.style.display = 'flex';
+                    itemDiv.style.justifyContent = 'space-between';
+                    itemDiv.style.alignItems = 'center';
+                    itemDiv.style.padding = '12px 16px';
+                    itemDiv.style.border = '1px solid #e2e8f0';
+                    itemDiv.style.borderRadius = '8px';
+
+                    const labelSpan = document.createElement('span');
+                    labelSpan.textContent = template.label || key;
+                    labelSpan.style.fontSize = '14px';
+                    labelSpan.style.color = '#334155';
+                    labelSpan.style.fontWeight = '500';
+
+                    const restoreAction = document.createElement('button');
+                    restoreAction.textContent = 'Restore';
+                    restoreAction.style.background = '#eff6ff';
+                    restoreAction.style.color = '#2563eb';
+                    restoreAction.style.border = 'none';
+                    restoreAction.style.padding = '6px 12px';
+                    restoreAction.style.borderRadius = '6px';
+                    restoreAction.style.fontSize = '12px';
+                    restoreAction.style.fontWeight = '600';
+                    restoreAction.style.cursor = 'pointer';
+                    restoreAction.style.transition = 'background-color 0.2s';
+                    restoreAction.onmouseover = () => restoreAction.style.background = '#dbeafe';
+                    restoreAction.onmouseout = () => restoreAction.style.background = '#eff6ff';
+
+                    restoreAction.onclick = () => {
+                        hiddenItems = hiddenItems.filter(k => k !== key);
+                        localStorage.setItem('hiddenTemplates', JSON.stringify(hiddenItems));
+                        renderSidebar();
+                        itemDiv.remove();
+                        if (hiddenItems.length === 0) {
+                            overlay.remove();
+                        }
+                    };
+
+                    itemDiv.appendChild(labelSpan);
+                    itemDiv.appendChild(restoreAction);
+                    listContainer.appendChild(itemDiv);
+                });
+            }
+
+            modal.appendChild(listContainer);
+            overlay.appendChild(modal);
+            document.body.appendChild(overlay);
+
+            // Close when clicking outside
+            overlay.addEventListener('mousedown', (e) => {
+                if (e.target === overlay) {
+                    overlay.remove();
+                }
+            });
         }
 
         function loadTemplate(key) {

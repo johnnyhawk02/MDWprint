@@ -215,6 +215,29 @@
             box-shadow: var(--shadow-lg);
         }
 
+        /* RESTORE HIDDEN BUTTON */
+        #restore-hidden-btn {
+            background-color: white;
+            color: #64748b;
+            border: 1px dashed #cbd5e1;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            box-shadow: var(--shadow-sm);
+        }
+        #restore-hidden-btn:hover {
+            background-color: #f8fafc;
+            color: #334155;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
         /* EXPORT BUTTON */
         #export-png-btn {
             background-color: white;
@@ -319,6 +342,10 @@
         </div>
         
         <div id="toolbar-controls">
+            <button id="restore-hidden-btn" onclick="showRestoreOverlay()" style="display: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                RESTORE HIDDEN
+            </button>
             <button id="export-png-btn" onclick="handleExportPng()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                 EXPORT PNG
@@ -559,17 +586,11 @@
                 }
             });
             
+            const restoreBtn = document.getElementById('restore-hidden-btn');
             if (hasHidden) {
-                const restoreBtn = document.createElement('button');
-                restoreBtn.className = 'restore-btn';
-                restoreBtn.style.marginTop = '16px';
-                restoreBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Restore Hidden`;
-                
-                restoreBtn.onclick = () => {
-                    showRestoreOverlay();
-                };
-                
-                sidebar.appendChild(restoreBtn);
+                restoreBtn.style.display = 'flex';
+            } else {
+                restoreBtn.style.display = 'none';
             }
             
             if (window.currentActiveKey) {

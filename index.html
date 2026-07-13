@@ -560,15 +560,58 @@
             });
             
             if (hasHidden) {
+                const restoreContainer = document.createElement('div');
+                restoreContainer.style.marginTop = '16px';
+                
                 const restoreBtn = document.createElement('button');
                 restoreBtn.className = 'restore-btn';
+                restoreBtn.style.marginTop = '0';
                 restoreBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Restore Hidden`;
+                
+                const restoreList = document.createElement('div');
+                restoreList.style.display = 'none';
+                restoreList.style.flexDirection = 'column';
+                restoreList.style.gap = '4px';
+                restoreList.style.marginTop = '8px';
+                
+                hiddenItems.forEach(key => {
+                    const template = TEMPLATES[key];
+                    if (!template) return;
+                    const itemBtn = document.createElement('div');
+                    itemBtn.className = 'sidebar-btn';
+                    itemBtn.style.opacity = '0.7';
+                    itemBtn.style.paddingLeft = '8px';
+                    itemBtn.style.paddingRight = '8px';
+                    itemBtn.style.fontSize = '13px';
+                    
+                    const labelSpan = document.createElement('span');
+                    labelSpan.textContent = template.label || key;
+                    
+                    const restoreAction = document.createElement('span');
+                    restoreAction.textContent = 'Restore';
+                    restoreAction.style.fontSize = '11px';
+                    restoreAction.style.fontWeight = '600';
+                    restoreAction.style.color = '#3b82f6';
+                    restoreAction.style.cursor = 'pointer';
+                    
+                    itemBtn.appendChild(labelSpan);
+                    itemBtn.appendChild(restoreAction);
+                    
+                    itemBtn.onclick = () => {
+                        hiddenItems = hiddenItems.filter(k => k !== key);
+                        localStorage.setItem('hiddenTemplates', JSON.stringify(hiddenItems));
+                        renderSidebar();
+                    };
+                    restoreList.appendChild(itemBtn);
+                });
+
                 restoreBtn.onclick = () => {
-                    hiddenItems = [];
-                    localStorage.removeItem('hiddenTemplates');
-                    renderSidebar();
+                    restoreList.style.display = restoreList.style.display === 'none' ? 'flex' : 'none';
                 };
-                sidebar.appendChild(restoreBtn);
+                
+                restoreContainer.appendChild(restoreBtn);
+                restoreContainer.appendChild(restoreList);
+                sidebar.appendChild(restoreContainer);
             }
             
             if (window.currentActiveKey) {

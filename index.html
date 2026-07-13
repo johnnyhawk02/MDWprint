@@ -239,6 +239,49 @@
             box-shadow: var(--shadow-md);
         }
         
+        /* CONTEXT MENU BUTTONS */
+        .context-menu-btn {
+            background: none;
+            border: none;
+            padding: 8px 12px;
+            text-align: left;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #ef4444;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: inherit;
+            transition: background-color 0.2s;
+        }
+        .context-menu-btn:hover {
+            background-color: #fee2e2;
+        }
+        .restore-btn {
+            background: none;
+            border: 1px dashed #cbd5e1;
+            padding: 8px 12px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #64748b;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-family: inherit;
+            transition: all 0.2s;
+            margin-top: 16px;
+        }
+        .restore-btn:hover {
+            background-color: #f1f5f9;
+            color: #334155;
+        }
+
         /* CHECKBOX */
         .checkbox-label {
             display: flex;
@@ -304,6 +347,13 @@
         </div>
     </div>
 
+    <div id="context-menu" style="display: none; position: absolute; background: white; border: 1px solid #e2e8f0; border-radius: 6px; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); padding: 4px; z-index: 50; flex-direction: column; min-width: 140px;">
+        <button id="hide-item-btn" class="context-menu-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+            Hide button
+        </button>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
         const ICONS = {
@@ -330,6 +380,11 @@
 
         const TEMPLATES = {
 
+            DrinksNotRefrigerated: {
+                icon: ICONS.alertTriangle,
+                label: "Drinks Not Fridge",
+                content: `<div style="writing-mode: vertical-rl; text-orientation: mixed; text-align: center; padding: 50px 0; margin: 0 auto; font-family: 'Inter', sans-serif; white-space: nowrap;"><p style="font-weight: 800; font-size: 48px; margin: 0; letter-spacing: 1px;">Drinks <span style="font-weight: 900; text-transform: uppercase;">NOT</span></p><p style="font-weight: 800; font-size: 48px; margin: 0; margin-right: 16px; letter-spacing: 1px;">refridgerated</p></div>`
+            },
             JoinOnlineMyFitApp: {
                 label: "Sefton Active App",
                 icon: ICONS.smartphone,
@@ -422,7 +477,7 @@
         };
 
         const SIDEBAR_ITEMS = [
-            'JoinOnlineMyFitApp', 'BecomeMember', 'PoolClassesQR',
+            'DrinksNotRefrigerated', 'JoinOnlineMyFitApp', 'BecomeMember', 'PoolClassesQR',
             'GymTimes', 'Rhymetime', 'FreeClassPass', 'MembershipPrices', 'SmallPool', 
             'HolidayPoolTimes', 'AdultOnlySwims', 'OAPSwims', 'OutOfOrder', 
             'WaterReception', 'MaleChange', 'FemaleChange', 'SaunaSteam', 'Retention', 
@@ -435,6 +490,7 @@
         });
 
         const DEFAULT_FAVORITES = ['Aquatics', 'BecomeMember', 'OAPSwims', 'MembershipPrices', 'Retention', 'SmallPool'];
+        let hiddenItems = JSON.parse(localStorage.getItem('hiddenTemplates') || '[]');
 
         function toggleFavorite(key, e) {
             e.stopPropagation();
@@ -456,7 +512,7 @@
                 key,
                 label: (TEMPLATES[key].label || key.replace(/([A-Z])/g, ' $1').trim()),
                 isFavorite: favorites.includes(key)
-            }));
+            })).filter(item => !hiddenItems.includes(item.key));
 
             items.sort((a, b) => {
                 if (a.isFavorite === b.isFavorite) {
@@ -472,6 +528,7 @@
             sidebar.innerHTML = '';
             
             const sortedItems = getSortedSidebarItems();
+            let hasHidden = hiddenItems.length > 0;
             
             sortedItems.forEach(item => {
                 const key = item.key;
@@ -493,10 +550,26 @@
                     btn.appendChild(starSvg);
                     
                     btn.onclick = () => loadTemplate(key);
+                    btn.oncontextmenu = (e) => {
+                        e.preventDefault();
+                        showContextMenu(e.pageX, e.pageY, key);
+                    };
                     btn.id = `btn-${key}`;
                     sidebar.appendChild(btn);
                 }
             });
+            
+            if (hasHidden) {
+                const restoreBtn = document.createElement('button');
+                restoreBtn.className = 'restore-btn';
+                restoreBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Restore Hidden`;
+                restoreBtn.onclick = () => {
+                    hiddenItems = [];
+                    localStorage.removeItem('hiddenTemplates');
+                    renderSidebar();
+                };
+                sidebar.appendChild(restoreBtn);
+            }
             
             if (window.currentActiveKey) {
                 const activeBtn = document.getElementById(`btn-${window.currentActiveKey}`);
@@ -614,6 +687,40 @@
                 btn.style.pointerEvents = 'auto';
             }
         }
+        
+        let contextMenuTargetKey = null;
+        const contextMenu = document.getElementById('context-menu');
+
+        function showContextMenu(x, y, key) {
+            contextMenuTargetKey = key;
+            contextMenu.style.display = 'flex';
+            contextMenu.style.left = `${x}px`;
+            contextMenu.style.top = `${y}px`;
+        }
+
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('#context-menu')) return;
+            if (contextMenu) contextMenu.style.display = 'none';
+        });
+
+        document.getElementById('hide-item-btn').addEventListener('click', () => {
+            if (contextMenuTargetKey) {
+                hiddenItems.push(contextMenuTargetKey);
+                localStorage.setItem('hiddenTemplates', JSON.stringify(hiddenItems));
+                
+                if (window.currentActiveKey === contextMenuTargetKey) {
+                    const firstAvailable = SIDEBAR_ITEMS.find(k => !hiddenItems.includes(k));
+                    if (firstAvailable) {
+                        loadTemplate(firstAvailable);
+                    } else {
+                        document.getElementById('editor').innerHTML = '';
+                    }
+                }
+                
+                renderSidebar();
+            }
+            contextMenu.style.display = 'none';
+        });
 
 
         function handlePrint() {

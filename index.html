@@ -407,6 +407,21 @@
 
         const TEMPLATES = {
 
+            SummerSwimSplash: {
+                icon: ICONS.sun,
+                label: "Swim & Splash",
+                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 10px;">Swim & Splash</p><p style="font-size: 14px; font-weight: 600; border-top: 1px dashed #000; border-bottom: 1px dashed #000; padding: 4px 0; margin-bottom: 12px;">Summer Hols - Kids £2.70</p><div style="display: flex; justify-content: space-between; width: 100%; padding: 0 5px; font-size: 16px;"><span style="font-weight: 600;">Mon - Fri</span><div style="text-align: right;">10:00 - 12:00<br>13:00 - 15:00</div></div>`
+            },
+            ToiletLockBroken: {
+                icon: ICONS.alertTriangle,
+                label: "Toilet Lock Broken",
+                content: `<div style="writing-mode: vertical-rl; text-orientation: mixed; text-align: center; padding: 50px 0; margin: 0 auto; font-family: 'Inter', sans-serif; white-space: nowrap;"><p style="font-weight: 800; font-size: 64px; margin: 0; letter-spacing: 1px; color: #000000;">Lock is <span style="font-weight: 900; text-transform: uppercase;">BROKEN</span></p><p style="font-weight: 700; font-size: 42px; margin: 0; margin-right: 16px; letter-spacing: 1px; color: #000000;">Toilet still usable.</p><p style="font-weight: 700; font-size: 42px; margin: 0; margin-right: 8px; letter-spacing: 1px; color: #000000;">Please knock!</p></div>`
+            },
+            LockNotWorking: {
+                icon: ICONS.alertTriangle,
+                label: "Lock Not Working",
+                content: `<div style="writing-mode: vertical-rl; text-orientation: mixed; text-align: center; padding: 50px 0; margin: 0 auto; font-family: 'Inter', sans-serif; white-space: nowrap;"><p style="font-weight: 800; font-size: 48px; margin: 0; letter-spacing: 1px;">Lock is <span style="font-weight: 900; text-transform: uppercase;">NOT</span></p><p style="font-weight: 800; font-size: 48px; margin: 0; margin-right: 16px; letter-spacing: 1px;">working</p></div>`
+            },
             DrinksNotRefrigerated: {
                 icon: ICONS.alertTriangle,
                 label: "Drinks Not Fridge",
@@ -504,7 +519,7 @@
         };
 
         const SIDEBAR_ITEMS = [
-            'DrinksNotRefrigerated', 'JoinOnlineMyFitApp', 'BecomeMember', 'PoolClassesQR',
+            'SummerSwimSplash', 'ToiletLockBroken', 'LockNotWorking', 'DrinksNotRefrigerated', 'JoinOnlineMyFitApp', 'BecomeMember', 'PoolClassesQR',
             'GymTimes', 'Rhymetime', 'FreeClassPass', 'MembershipPrices', 'SmallPool', 
             'HolidayPoolTimes', 'AdultOnlySwims', 'OAPSwims', 'OutOfOrder', 
             'WaterReception', 'MaleChange', 'FemaleChange', 'SaunaSteam', 'Retention', 

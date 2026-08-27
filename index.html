@@ -417,6 +417,16 @@
                 label: "Swim & Splash",
                 content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 4px;">Swim & Splash</p><p style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">Wed 22 July - Fri 28 Aug</p><p style="font-size: 12.5px; font-weight: 600; border-top: 1px dashed #000; border-bottom: 1px dashed #000; padding: 4px 0; margin-bottom: 10px; text-align: center; width: 100%;">Kids £3.20 &nbsp;|&nbsp; Adults £7.30 &nbsp;|&nbsp; OAP £4.70</p><p style="font-size: 16px; font-weight: 700; border-bottom: 1px dashed #000; padding-bottom: 4px; margin-bottom: 8px;">Main Pool</p><div style="display: flex; justify-content: space-between; width: 100%; padding: 0 5px; margin-bottom: 12px; font-size: 15px;"><span style="font-weight: 600;">Mon - Fri</span><div style="text-align: right;">10:00 - 12:00<br>13:00 - 15:00</div></div><p style="font-size: 16px; font-weight: 700; border-bottom: 1px dashed #000; padding-bottom: 4px; margin-bottom: 8px;">Small Pool</p><div style="display: flex; justify-content: space-between; width: 100%; padding: 0 5px; margin-bottom: 4px; font-size: 15px;"><span style="font-weight: 600;">Mon Wed Fri</span><div style="text-align: right;">10:00 - 12:00<br>13:00 - 15:00</div></div><div style="display: flex; justify-content: space-between; width: 100%; padding: 0 5px; margin-bottom: 4px; font-size: 15px;"><span style="font-weight: 600;">Tue Thu</span><span>13:00 - 15:00</span></div><p style="font-size: 11px; font-weight: 500; font-style: italic; margin-top: 12px; line-height: 1.2;">Please note: between 12:00 and 13:00, the main pool is adult only and the small pool is open to families only.</p><p style="font-size: 11px; font-weight: 500; font-style: italic; margin-top: 4px; line-height: 1.2;">Outside of these times: Kids £4.70</p>`
             },
+            ToiletLockBroken: {
+                icon: ICONS.alertTriangle,
+                label: "Toilet Lock Broken",
+                content: `<div style="writing-mode: vertical-rl; text-orientation: mixed; text-align: center; padding: 50px 0; margin: 0 auto; font-family: 'Inter', sans-serif; white-space: nowrap;"><p style="font-weight: 800; font-size: 64px; margin: 0; letter-spacing: 1px; color: #000000;">Lock is <span style="font-weight: 900; text-transform: uppercase;">BROKEN</span></p><p style="font-weight: 700; font-size: 42px; margin: 0; margin-right: 16px; letter-spacing: 1px; color: #000000;">Toilet still usable.</p><p style="font-weight: 700; font-size: 42px; margin: 0; margin-right: 8px; letter-spacing: 1px; color: #000000;">Please knock!</p></div>`
+            },
+            LockNotWorking: {
+                icon: ICONS.alertTriangle,
+                label: "Lock Not Working",
+                content: `<div style="writing-mode: vertical-rl; text-orientation: mixed; text-align: center; padding: 50px 0; margin: 0 auto; font-family: 'Inter', sans-serif; white-space: nowrap;"><p style="font-weight: 800; font-size: 48px; margin: 0; letter-spacing: 1px;">Lock is <span style="font-weight: 900; text-transform: uppercase;">NOT</span></p><p style="font-weight: 800; font-size: 48px; margin: 0; margin-right: 16px; letter-spacing: 1px;">working</p></div>`
+            },
             DrinksNotRefrigerated: {
                 icon: ICONS.alertTriangle,
                 label: "Drinks Not Fridge",
@@ -514,7 +524,7 @@
         };
 
         const SIDEBAR_ITEMS = [
-            'MeadowsLeisureCentre', 'SummerSwimSplash', 'DrinksNotRefrigerated', 'JoinOnlineMyFitApp', 'BecomeMember', 'PoolClassesQR',
+            'MeadowsLeisureCentre', 'SummerSwimSplash', 'ToiletLockBroken', 'LockNotWorking', 'DrinksNotRefrigerated', 'JoinOnlineMyFitApp', 'BecomeMember', 'PoolClassesQR',
             'GymTimes', 'Rhymetime', 'FreeClassPass', 'MembershipPrices', 'SmallPool', 
             'HolidayPoolTimes', 'AdultOnlySwims', 'OAPSwims', 'OutOfOrder', 
             'WaterReception', 'MaleChange', 'FemaleChange', 'SaunaSteam', 'Retention', 
@@ -527,7 +537,12 @@
         });
 
         const DEFAULT_FAVORITES = ['Aquatics', 'BecomeMember', 'OAPSwims', 'MembershipPrices', 'Retention', 'SmallPool'];
-        let hiddenItems = JSON.parse(localStorage.getItem('hiddenTemplates') || '[]');
+        const DEFAULT_HIDDEN = ['HolidayPoolTimes', 'FreeClassPass', 'SummerSwimSplash', 'FemaleChange', 'MaleChange', 'DrinksNotRefrigerated', 'OutOfOrder', 'Printouts', 'WaterReception'];
+        let hiddenItems = JSON.parse(localStorage.getItem('sefton_hidden_items'));
+        if (!hiddenItems) {
+            hiddenItems = DEFAULT_HIDDEN;
+            localStorage.setItem('sefton_hidden_items', JSON.stringify(hiddenItems));
+        }
 
         function toggleFavorite(key, e) {
             e.stopPropagation();
@@ -720,7 +735,7 @@
 
                     restoreAction.onclick = () => {
                         hiddenItems = hiddenItems.filter(k => k !== key);
-                        localStorage.setItem('hiddenTemplates', JSON.stringify(hiddenItems));
+                        localStorage.setItem('sefton_hidden_items', JSON.stringify(hiddenItems));
                         renderSidebar();
                         itemDiv.remove();
                         if (hiddenItems.length === 0) {
@@ -875,7 +890,7 @@
         document.getElementById('hide-item-btn').addEventListener('click', () => {
             if (contextMenuTargetKey) {
                 hiddenItems.push(contextMenuTargetKey);
-                localStorage.setItem('hiddenTemplates', JSON.stringify(hiddenItems));
+                localStorage.setItem('sefton_hidden_items', JSON.stringify(hiddenItems));
                 
                 if (window.currentActiveKey === contextMenuTargetKey) {
                     const firstAvailable = SIDEBAR_ITEMS.find(k => !hiddenItems.includes(k));

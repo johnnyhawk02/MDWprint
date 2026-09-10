@@ -452,6 +452,11 @@
                 icon: ICONS.woman,
                 content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 8px;">Changing: Female</p><p style="font-size: 32px; font-weight: 700;">1350</p>`
             },
+            GroupChange: {
+                label: "Group Change",
+                icon: ICONS.user,
+                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 8px;">Group change</p><p style="font-size: 32px; font-weight: 700;">c1580x</p>`
+            },
             SaunaSteam: {
                 label: "Sauna & Steam",
                 icon: ICONS.thermometer,
@@ -527,7 +532,7 @@
             'MeadowsLeisureCentre', 'SummerSwimSplash', 'ToiletLockBroken', 'LockNotWorking', 'DrinksNotRefrigerated', 'JoinOnlineMyFitApp', 'BecomeMember', 'PoolClassesQR',
             'GymTimes', 'Rhymetime', 'FreeClassPass', 'MembershipPrices', 'SmallPool', 
             'HolidayPoolTimes', 'AdultOnlySwims', 'OAPSwims', 'OutOfOrder', 
-            'WaterReception', 'MaleChange', 'FemaleChange', 'SaunaSteam', 'Retention', 
+            'WaterReception', 'MaleChange', 'FemaleChange', 'GroupChange', 'SaunaSteam', 'Retention', 
             'Aquatics', 'Printouts'
         ];
 
@@ -567,10 +572,7 @@
             })).filter(item => !hiddenItems.includes(item.key));
 
             items.sort((a, b) => {
-                if (a.isFavorite === b.isFavorite) {
-                    return a.label.localeCompare(b.label);
-                }
-                return a.isFavorite ? -1 : 1;
+                return a.label.localeCompare(b.label);
             });
             return items;
         }
@@ -701,7 +703,12 @@
                 emptyText.style.margin = '20px 0';
                 listContainer.appendChild(emptyText);
             } else {
-                hiddenItems.forEach(key => {
+                let sortedHidden = [...hiddenItems].sort((a, b) => {
+                    const labelA = TEMPLATES[a]?.label || a;
+                    const labelB = TEMPLATES[b]?.label || b;
+                    return labelA.localeCompare(labelB);
+                });
+                sortedHidden.forEach(key => {
                     const template = TEMPLATES[key];
                     if (!template) return;
                     

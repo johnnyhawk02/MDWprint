@@ -115,7 +115,7 @@
             width: 16px;
             height: 16px;
             cursor: pointer;
-            color: #cbd5e1;
+            
             fill: none;
             stroke: currentColor;
             stroke-width: 2;
@@ -124,10 +124,10 @@
             margin-left: 8px;
         }
         .star-icon:hover {
-            color: #fbbf24;
+            
         }
         .star-icon.active {
-            color: #fbbf24;
+            
             fill: #fbbf24;
         }
 
@@ -210,7 +210,7 @@
         }
 
         #print-btn:hover {
-            background-color: #1e293b;
+            background-
             transform: translateY(-1px);
             box-shadow: var(--shadow-lg);
         }
@@ -218,8 +218,8 @@
         /* RESTORE HIDDEN BUTTON */
         #restore-hidden-btn {
             background-color: white;
-            color: #64748b;
-            border: 1px dashed #cbd5e1;
+            
+            border: 1px dashed #000;
             padding: 8px 16px;
             border-radius: 8px;
             font-size: 14px;
@@ -232,8 +232,8 @@
             box-shadow: var(--shadow-sm);
         }
         #restore-hidden-btn:hover {
-            background-color: #f8fafc;
-            color: #334155;
+            background-
+            
             transform: translateY(-1px);
             box-shadow: var(--shadow-md);
         }
@@ -256,8 +256,8 @@
         }
 
         #export-png-btn:hover {
-            background-color: #f8fafc;
-            border-color: #cbd5e1;
+            background-
+            border-
             transform: translateY(-1px);
             box-shadow: var(--shadow-md);
         }
@@ -271,7 +271,7 @@
             cursor: pointer;
             border-radius: 4px;
             font-size: 14px;
-            color: #ef4444;
+            
             width: 100%;
             display: flex;
             align-items: center;
@@ -280,17 +280,17 @@
             transition: background-color 0.2s;
         }
         .context-menu-btn:hover {
-            background-color: #fee2e2;
+            background-
         }
         .restore-btn {
             background: none;
-            border: 1px dashed #cbd5e1;
+            border: 1px dashed #000;
             padding: 8px 12px;
             text-align: center;
             cursor: pointer;
             border-radius: 6px;
             font-size: 12px;
-            color: #64748b;
+            
             width: 100%;
             display: flex;
             align-items: center;
@@ -301,8 +301,8 @@
             margin-top: 16px;
         }
         .restore-btn:hover {
-            background-color: #f1f5f9;
-            color: #334155;
+            background-
+            
         }
 
         /* CHECKBOX */
@@ -374,7 +374,7 @@
         </div>
     </div>
 
-    <div id="context-menu" style="display: none; position: absolute; background: white; border: 1px solid #e2e8f0; border-radius: 6px; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); padding: 4px; z-index: 50; flex-direction: column; min-width: 140px;">
+    <div id="context-menu" style="display: none; position: absolute; background: white; border: 1px solid #000; border-radius: 6px; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); padding: 4px; z-index: 50; flex-direction: column; min-width: 140px;">
         <button id="hide-item-btn" class="context-menu-btn">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
             Hide button
@@ -409,7 +409,7 @@
             MeadowsLeisureCentre: {
                 icon: ICONS.phone,
                 label: "Meadows Contact",
-                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 0px;">Meadows</p><p style="font-size: 14px; font-weight: 500; margin-bottom: 8px; color: #475569;">Leisure Centre</p><p style="font-size: 20px; margin-bottom: 4px;">0151 288 6727</p>`
+                content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 4px;">Meadows Leisure Centre</p><p style="font-size: 20px; margin-bottom: 4px;">0151 288 6727</p>`
             },
 
             SummerSwimSplash: {
@@ -420,27 +420,27 @@
             ToiletLockBroken: {
                 icon: ICONS.alertTriangle,
                 label: "Toilet Lock Broken",
-                content: `<div style="writing-mode: vertical-rl; text-orientation: mixed; text-align: center; padding: 50px 0; margin: 0 auto; font-family: 'Inter', sans-serif; white-space: nowrap;"><p style="font-weight: 800; font-size: 64px; margin: 0; letter-spacing: 1px; color: #000000;">Lock is <span style="font-weight: 900; text-transform: uppercase;">BROKEN</span></p><p style="font-weight: 700; font-size: 42px; margin: 0; margin-right: 16px; letter-spacing: 1px; color: #000000;">Toilet still usable.</p><p style="font-weight: 700; font-size: 42px; margin: 0; margin-right: 8px; letter-spacing: 1px; color: #000000;">Please knock!</p></div>`
+                content: `<div style="writing-mode: vertical-rl; text-orientation: mixed; text-align: center; padding: 50px 0; margin: 0 auto;  white-space: nowrap;"><p style="font-weight: 800; font-size: 64px; margin: 0; letter-spacing: 1px; ">Lock is <span style="font-weight: 900; text-transform: uppercase;">BROKEN</span></p><p style="font-weight: 700; font-size: 42px; margin: 0; margin-right: 16px; letter-spacing: 1px; ">Toilet still usable.</p><p style="font-weight: 700; font-size: 42px; margin: 0; margin-right: 8px; letter-spacing: 1px; ">Please knock!</p></div>`
             },
             LockNotWorking: {
                 icon: ICONS.alertTriangle,
                 label: "Lock Not Working",
-                content: `<div style="writing-mode: vertical-rl; text-orientation: mixed; text-align: center; padding: 50px 0; margin: 0 auto; font-family: 'Inter', sans-serif; white-space: nowrap;"><p style="font-weight: 800; font-size: 48px; margin: 0; letter-spacing: 1px;">Lock is <span style="font-weight: 900; text-transform: uppercase;">NOT</span></p><p style="font-weight: 800; font-size: 48px; margin: 0; margin-right: 16px; letter-spacing: 1px;">working</p></div>`
+                content: `<div style="writing-mode: vertical-rl; text-orientation: mixed; text-align: center; padding: 50px 0; margin: 0 auto;  white-space: nowrap;"><p style="font-weight: 800; font-size: 48px; margin: 0; letter-spacing: 1px;">Lock is <span style="font-weight: 900; text-transform: uppercase;">NOT</span></p><p style="font-weight: 800; font-size: 48px; margin: 0; margin-right: 16px; letter-spacing: 1px;">working</p></div>`
             },
             DrinksNotRefrigerated: {
                 icon: ICONS.alertTriangle,
                 label: "Drinks Not Fridge",
-                content: `<div style="writing-mode: vertical-rl; text-orientation: mixed; text-align: center; padding: 50px 0; margin: 0 auto; font-family: 'Inter', sans-serif; white-space: nowrap;"><p style="font-weight: 800; font-size: 48px; margin: 0; letter-spacing: 1px;">Drinks <span style="font-weight: 900; text-transform: uppercase;">NOT</span></p><p style="font-weight: 800; font-size: 48px; margin: 0; margin-right: 16px; letter-spacing: 1px;">refridgerated</p></div>`
+                content: `<div style="writing-mode: vertical-rl; text-orientation: mixed; text-align: center; padding: 50px 0; margin: 0 auto;  white-space: nowrap;"><p style="font-weight: 800; font-size: 48px; margin: 0; letter-spacing: 1px;">Drinks <span style="font-weight: 900; text-transform: uppercase;">NOT</span></p><p style="font-weight: 800; font-size: 48px; margin: 0; margin-right: 16px; letter-spacing: 1px;">refridgerated</p></div>`
             },
             JoinOnlineMyFitApp: {
                 label: "Sefton Active App",
                 icon: ICONS.smartphone,
-                content: `<div style="font-family: 'Inter', sans-serif; color: #0f172a;"><div style="margin-bottom: 20px;"><p style="font-weight: 900; font-size: 24px; margin-bottom: 4px; line-height: 1; letter-spacing: -0.03em;">Active Sefton App</p></div><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://get.myfitapp.de/a/A4R6?p=5" style="width: 140px; height: 140px; display: block; margin: 0 auto 24px auto;"><div style="text-align: left; font-size: 14px; padding: 0 8px;"><p style="margin-bottom: 8px; font-weight: 700; font-size: 12px; text-transform: uppercase; color: #64748b; letter-spacing: 0.05em;">Download Instructions</p><ol style="margin: 0; padding-left: 18px; line-height: 1.5; font-weight: 500; color: #334155;"><li>Scan the QR code above</li><li>Tap the link that appears</li><li>Install <strong>Active Sefton</strong> app</li></ol></div></div>`
+                content: `<div style=" "><div style="margin-bottom: 20px;"><p style="font-weight: 900; font-size: 24px; margin-bottom: 4px; line-height: 1; letter-spacing: -0.03em;">Active Sefton App</p></div><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://get.myfitapp.de/a/A4R6?p=5" style="width: 140px; height: 140px; display: block; margin: 0 auto 24px auto;"><div style="text-align: left; font-size: 14px; padding: 0 8px;"><p style="margin-bottom: 8px; font-weight: 700; font-size: 12px; text-transform: uppercase;  letter-spacing: 0.05em;">Download Instructions</p><ol style="margin: 0; padding-left: 18px; line-height: 1.5; font-weight: 500; "><li>Scan the QR code above</li><li>Tap the link that appears</li><li>Install <strong>Active Sefton</strong> app</li></ol></div></div>`
             },
             BecomeMember: {
                 label: "Become A Member",
                 icon: ICONS.userPlus,
-                content: `<div style="font-family: 'Inter', sans-serif; color: #0f172a;"><div style="margin-bottom: 20px;"><p style="font-weight: 900; font-size: 24px; margin-bottom: 4px; line-height: 1; letter-spacing: -0.03em;">Become A Member</p></div><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://get.myfitapp.de/a/A4R6?p=5" style="width: 140px; height: 140px; display: block; margin: 0 auto 24px auto;"><div style="text-align: left; font-size: 14px; padding: 0 8px;"><p style="margin-bottom: 8px; font-weight: 700; font-size: 12px; text-transform: uppercase; color: #64748b; letter-spacing: 0.05em;">How to join</p><ol style="margin: 0; padding-left: 18px; line-height: 1.5; font-weight: 500; color: #334155;"><li>Scan QR code to download app</li><li>Press <strong>Join Now</strong></li><li>Select your preferred centre</li><li>Choose your membership</li><li>Enter details to complete</li></ol></div></div>`
+                content: `<div style=" "><div style="margin-bottom: 20px;"><p style="font-weight: 900; font-size: 24px; margin-bottom: 4px; line-height: 1; letter-spacing: -0.03em;">Become A Member</p></div><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://get.myfitapp.de/a/A4R6?p=5" style="width: 140px; height: 140px; display: block; margin: 0 auto 24px auto;"><div style="text-align: left; font-size: 14px; padding: 0 8px;"><p style="margin-bottom: 8px; font-weight: 700; font-size: 12px; text-transform: uppercase;  letter-spacing: 0.05em;">How to join</p><ol style="margin: 0; padding-left: 18px; line-height: 1.5; font-weight: 500; "><li>Scan QR code to download app</li><li>Press <strong>Join Now</strong></li><li>Select your preferred centre</li><li>Choose your membership</li><li>Enter details to complete</li></ol></div></div>`
             },
             MaleChange: {
                 label: "Changing: Male",
@@ -493,12 +493,12 @@
             FreeClassPass: {
                 label: "Free Class Pass",
                 icon: ICONS.ticket,
-                content: `<div style="font-family: 'Inter', sans-serif; color: #0f172a;"><div style="margin-bottom: 20px;"><p style="font-weight: 600; font-size: 12px; color: #64748b; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em;">Meadows Leisure Centre</p><p style="font-weight: 900; font-size: 26px; line-height: 1; letter-spacing: -0.03em;">Free Class Pass</p></div><div style="text-align: left; width: 100%; padding: 0 10px; box-sizing: border-box; font-size: 14px;"><div style="display: flex; align-items: baseline; margin-bottom: 15px;"><span style="font-weight: 600; margin-right: 8px;">Class:</span><div style="flex-grow: 1; border-bottom: 1px dashed #000;">&nbsp;</div></div><div style="display: flex; align-items: baseline; margin-bottom: 15px;"><span style="font-weight: 600; margin-right: 8px;">Date:</span><div style="flex-grow: 1; border-bottom: 1px dashed #000;">&nbsp;</div><span style="font-weight: 600; margin: 0 8px;">Time:</span><div style="width: 50px; border-bottom: 1px dashed #000;">&nbsp;</div></div><div style="display: flex; align-items: baseline; margin-bottom: 15px;"><span style="font-weight: 600; margin-right: 8px;">Name:</span><div style="flex-grow: 1; border-bottom: 1px dashed #000;">&nbsp;</div></div><div style="display: flex; align-items: baseline; margin-bottom: 15px;"><span style="font-weight: 600; margin-right: 8px;">Authorized by:</span><div style="flex-grow: 1; border-bottom: 1px dashed #000;">&nbsp;</div></div></div></div>`
+                content: `<div style=" "><div style="margin-bottom: 20px;"><p style="font-weight: 600; font-size: 12px;  margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em;">Meadows Leisure Centre</p><p style="font-weight: 900; font-size: 26px; line-height: 1; letter-spacing: -0.03em;">Free Class Pass</p></div><div style="text-align: left; width: 100%; padding: 0 10px; box-sizing: border-box; font-size: 14px;"><div style="display: flex; align-items: baseline; margin-bottom: 15px;"><span style="font-weight: 600; margin-right: 8px;">Class:</span><div style="flex-grow: 1; border-bottom: 1px dashed #000;">&nbsp;</div></div><div style="display: flex; align-items: baseline; margin-bottom: 15px;"><span style="font-weight: 600; margin-right: 8px;">Date:</span><div style="flex-grow: 1; border-bottom: 1px dashed #000;">&nbsp;</div><span style="font-weight: 600; margin: 0 8px;">Time:</span><div style="width: 50px; border-bottom: 1px dashed #000;">&nbsp;</div></div><div style="display: flex; align-items: baseline; margin-bottom: 15px;"><span style="font-weight: 600; margin-right: 8px;">Name:</span><div style="flex-grow: 1; border-bottom: 1px dashed #000;">&nbsp;</div></div><div style="display: flex; align-items: baseline; margin-bottom: 15px;"><span style="font-weight: 600; margin-right: 8px;">Authorized by:</span><div style="flex-grow: 1; border-bottom: 1px dashed #000;">&nbsp;</div></div></div></div>`
             },
             MembershipPrices: {
                 label: "Prices",
                 icon: ICONS.tag,
-                content: `<div style="font-family: 'Inter', sans-serif; color: #0f172a;"><div style="margin-bottom: 16px;"><p style="font-weight: 900; font-size: 24px; margin-bottom: 4px; line-height: 1; letter-spacing: -0.03em;">Membership Prices</p><p style="font-size: 11px; font-weight: 500; color: #475569; margin-bottom: 0;">All contracts roll monthly after initial period</p></div><div style="margin-bottom: 12px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px;"><p style="font-weight: 700; font-size: 16px; margin-bottom: 4px; text-align: left;">Active Sefton Single</p><div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 2px;"><span style="font-weight: 500;">Committed (12mth)</span><span style="text-align: right;">£33/mth or £363/yr</span></div><div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="font-weight: 500;">Non-Committed (3mth min)</span><span style="text-align: right;">£43/mth</span></div></div><div style="margin-bottom: 12px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px;"><p style="font-weight: 700; font-size: 16px; margin-bottom: 2px; text-align: left;">Concession</p><p style="font-size: 11px; font-weight: 500; color: #475569; margin-top: 0; margin-bottom: 6px; line-height: 1.3;">Workforce, Referral, Student, Saver+</p><div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 2px;"><span style="font-weight: 500;">Committed (12mth)</span><span style="text-align: right;">£308/yr</span></div><div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;"><span style="font-weight: 500;">Non-Committed (3mth min)</span><span style="text-align: right;">£28/mth</span></div><p style="font-size: 13px; font-style: italic; color: #0f172a; margin-top: 0; margin-bottom: 0; text-align: left;">Saver+ has an additional £15 annual fee</p></div><div style="margin-bottom: 12px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px;"><p style="font-weight: 700; font-size: 16px; margin-bottom: 4px; text-align: left;">Corporate & Buddy</p><div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 2px;"><span style="font-weight: 500;">Committed (12mth)</span><span style="text-align: right;">£330/yr</span></div><div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="font-weight: 500;">Non-Committed (3mth min)</span><span style="text-align: right;">£30/mth</span></div></div><div style="margin-bottom: 12px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px;"><p style="font-weight: 700; font-size: 16px; margin-bottom: 4px; text-align: left;">Youth (11-16yrs)</p><div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 2px;"><span style="font-weight: 500;">Committed (12mth)</span><span style="text-align: right;">£220/yr</span></div><div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="font-weight: 500;">Non-Committed (3mth min)</span><span style="text-align: right;">£20/mth</span></div></div><div style="margin-bottom: 12px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px;"><p style="font-weight: 700; font-size: 16px; margin-bottom: 4px; text-align: left;">Swim (Adult)</p><div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 2px;"><span style="font-weight: 500;">Committed (12mth)</span><span style="text-align: right;">£297/yr</span></div><div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="font-weight: 500;">Non-Committed (3mth min)</span><span style="text-align: right;">£27/mth</span></div></div><div style="margin-bottom: 12px;"><p style="font-weight: 700; font-size: 16px; margin-bottom: 4px; text-align: left;">Swim (Junior 3-10)</p><div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 2px;"><span style="font-weight: 500;">Committed (12mth)</span><span style="text-align: right;">£187/yr</span></div><div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="font-weight: 500;">Non-Committed (3mth min)</span><span style="text-align: right;">£17/mth</span></div></div><div style="margin-top: 20px; border-top: 2px solid #e2e8f0; padding-top: 16px; text-align: center;"><p style="font-weight: 700; font-size: 14px; margin-bottom: 12px;">Ready to join?</p><img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://get.myfitapp.de/a/A4R6?p=5" style="width: 100px; height: 100px; display: block; margin: 0 auto 12px auto;"><p style="font-size: 12px; font-weight: 500; color: #475569; margin: 0; line-height: 1.4;">Scan to download our app<br>and become a member</p></div></div>`
+                content: `<div style=" "><div style="margin-bottom: 16px;"><p style="font-weight: 900; font-size: 24px; margin-bottom: 4px; line-height: 1; letter-spacing: -0.03em;">Membership Prices</p><p style="font-size: 11px; font-weight: 500;  margin-bottom: 0;">All contracts roll monthly after initial period</p></div><div style="margin-bottom: 12px; border-bottom: 1px dashed #000; padding-bottom: 8px;"><p style="font-weight: 700; font-size: 16px; margin-bottom: 4px; text-align: left;">Active Sefton Single</p><div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 2px;"><span style="font-weight: 500;">Committed (12mth)</span><span style="text-align: right;">£33/mth or £363/yr</span></div><div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="font-weight: 500;">Non-Committed (3mth min)</span><span style="text-align: right;">£43/mth</span></div></div><div style="margin-bottom: 12px; border-bottom: 1px dashed #000; padding-bottom: 8px;"><p style="font-weight: 700; font-size: 16px; margin-bottom: 2px; text-align: left;">Concession</p><p style="font-size: 11px; font-weight: 500;  margin-top: 0; margin-bottom: 6px; line-height: 1.3;">Workforce, Referral, Student, Saver+</p><div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 2px;"><span style="font-weight: 500;">Committed (12mth)</span><span style="text-align: right;">£308/yr</span></div><div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;"><span style="font-weight: 500;">Non-Committed (3mth min)</span><span style="text-align: right;">£28/mth</span></div><p style="font-size: 13px; font-style: italic;  margin-top: 0; margin-bottom: 0; text-align: left;">Saver+ has an additional £15 annual fee</p></div><div style="margin-bottom: 12px; border-bottom: 1px dashed #000; padding-bottom: 8px;"><p style="font-weight: 700; font-size: 16px; margin-bottom: 4px; text-align: left;">Corporate & Buddy</p><div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 2px;"><span style="font-weight: 500;">Committed (12mth)</span><span style="text-align: right;">£330/yr</span></div><div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="font-weight: 500;">Non-Committed (3mth min)</span><span style="text-align: right;">£30/mth</span></div></div><div style="margin-bottom: 12px; border-bottom: 1px dashed #000; padding-bottom: 8px;"><p style="font-weight: 700; font-size: 16px; margin-bottom: 4px; text-align: left;">Youth (11-16yrs)</p><div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 2px;"><span style="font-weight: 500;">Committed (12mth)</span><span style="text-align: right;">£220/yr</span></div><div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="font-weight: 500;">Non-Committed (3mth min)</span><span style="text-align: right;">£20/mth</span></div></div><div style="margin-bottom: 12px; border-bottom: 1px dashed #000; padding-bottom: 8px;"><p style="font-weight: 700; font-size: 16px; margin-bottom: 4px; text-align: left;">Swim (Adult)</p><div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 2px;"><span style="font-weight: 500;">Committed (12mth)</span><span style="text-align: right;">£297/yr</span></div><div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="font-weight: 500;">Non-Committed (3mth min)</span><span style="text-align: right;">£27/mth</span></div></div><div style="margin-bottom: 12px;"><p style="font-weight: 700; font-size: 16px; margin-bottom: 4px; text-align: left;">Swim (Junior 3-10)</p><div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 2px;"><span style="font-weight: 500;">Committed (12mth)</span><span style="text-align: right;">£187/yr</span></div><div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="font-weight: 500;">Non-Committed (3mth min)</span><span style="text-align: right;">£17/mth</span></div></div><div style="margin-top: 20px; border-top: 2px solid #000; padding-top: 16px; text-align: center;"><p style="font-weight: 700; font-size: 14px; margin-bottom: 12px;">Ready to join?</p><img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://get.myfitapp.de/a/A4R6?p=5" style="width: 100px; height: 100px; display: block; margin: 0 auto 12px auto;"><p style="font-size: 12px; font-weight: 500;  margin: 0; line-height: 1.4;">Scan to download our app<br>and become a member</p></div></div>`
             },
             Retention: {
                 icon: ICONS.phone,
@@ -514,17 +514,17 @@
             },
             OutOfOrder: {
                 icon: ICONS.alertTriangle,
-                content: `<div style="writing-mode: vertical-rl; text-orientation: mixed; text-align: center; padding: 120px 0; margin: 0 auto; font-family: 'Inter', sans-serif;"><p style="font-weight: 900; font-size: 52px; margin: 0; text-transform: uppercase; letter-spacing: 5px;">OUT OF ORDER</p><p style="font-weight: 600; font-size: 20px; margin: 0; margin-right: 30px; color: #334155; letter-spacing: 1px;">MANAGER NOTIFIED:<br>{{DATETIME}}</p></div>`
+                content: `<div style="writing-mode: vertical-rl; text-orientation: mixed; text-align: center; padding: 120px 0; margin: 0 auto; "><p style="font-weight: 900; font-size: 52px; margin: 0; text-transform: uppercase; letter-spacing: 5px;">OUT OF ORDER</p><p style="font-weight: 600; font-size: 20px; margin: 0; margin-right: 30px;  letter-spacing: 1px;">MANAGER NOTIFIED:<br>{{DATETIME}}</p></div>`
             },
             WaterReception: {
                 icon: ICONS.waves,
                 label: "Water",
-                content: `<div style="writing-mode: vertical-rl; text-orientation: mixed; text-align: center; padding: 30px 0; margin: 0 auto; font-family: 'Inter', sans-serif; white-space: nowrap;"><p style="font-weight: 800; font-size: 42px; margin: 0; letter-spacing: 1px;">If you want water,</p><p style="font-weight: 700; font-size: 38px; margin: 0; margin-right: 15px;">it's £1 a bottle.</p><p style="font-weight: 500; font-size: 32px; margin: 0; margin-right: 15px; color: #334155;">Please ask at reception.</p></div>`
+                content: `<div style="writing-mode: vertical-rl; text-orientation: mixed; text-align: center; padding: 30px 0; margin: 0 auto;  white-space: nowrap;"><p style="font-weight: 800; font-size: 42px; margin: 0; letter-spacing: 1px;">If you want water,</p><p style="font-weight: 700; font-size: 38px; margin: 0; margin-right: 15px;">it's £1 a bottle.</p><p style="font-weight: 500; font-size: 32px; margin: 0; margin-right: 15px; ">Please ask at reception.</p></div>`
             },
             PoolClassesQR: {
                 icon: ICONS.globe,
                 label: "Pool & Class Times",
-                content: `<div style="font-family: 'Inter', sans-serif; color: #0f172a; padding: 8px;"><div style="margin-bottom: 24px; text-align: center;"><p style="font-weight: 900; font-size: 24px; margin-bottom: 6px; line-height: 1.1; letter-spacing: -0.02em;">Meadows</p><p style="font-weight: 600; font-size: 16px; color: #475569; margin: 0;">Pool &amp; Class Times</p></div><img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://www.activeseftonfitness.co.uk/meadows-leisure-centre" style="width: 100px; height: 100px; display: block; margin: 0 auto;" alt="Pool & Class Times QR"></div>`
+                content: `<div style="  padding: 8px;"><div style="margin-bottom: 24px; text-align: center;"><p style="font-weight: 900; font-size: 24px; margin-bottom: 6px; line-height: 1.1; letter-spacing: -0.02em;">Meadows</p><p style="font-weight: 600; font-size: 16px;  margin: 0;">Pool &amp; Class Times</p></div><img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://www.activeseftonfitness.co.uk/meadows-leisure-centre" style="width: 100px; height: 100px; display: block; margin: 0 auto;" alt="Pool & Class Times QR"></div>`
             }
         };
 
@@ -995,7 +995,7 @@
                         }
                         img { max-width: 100%; height: auto; display: block; margin: 8px auto; }
                         p { margin: 0; padding: 0; text-align: center; width: 100%; word-wrap: break-word; }
-                        .footer-mdw { font-size: 4px; color: #000; margin-top: 15px; text-align: center; width: 100%; opacity: 0.2; }
+                        .footer-mdw { font-size: 4px;  margin-top: 15px; text-align: center; width: 100%; opacity: 0.2; }
                     </style>
                 </head>
                 <body>

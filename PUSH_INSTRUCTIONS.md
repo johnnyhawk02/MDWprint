@@ -1,43 +1,74 @@
-# How to Push to GitHub Manually
+# Git & GitHub Push Instructions
 
-Since you've opted to manage the repository manually, follow these steps to push your code to GitHub.
+This repository is version-controlled with Git and structured into modular files (`index.html`, `styles.css`, `app.js`). Follow this guide to push updates to GitHub, manage branches, or restore previous versions.
 
-## Prerequisites
+---
 
-1.  **Git Installed**: Ensure you have Git installed on your local machine.
-2.  **GitHub Account**: You need a GitHub account.
-3.  **Create Repository**: Go to [GitHub](https://github.com/new) and create a new empty repository named `active-sefton-slip-printer` (or whatever you prefer). Do **not** initialize it with a README, .gitignore, or license.
+## 1. Connecting & Pushing to GitHub
 
-## Steps
+If you have created a repository on GitHub (e.g. `https://github.com/your-username/active-sefton-slip-printer.git`):
 
-1.  **Download Code**: Download the project files to your local machine.
-2.  **Open Terminal**: Open your terminal or command prompt and navigate to the project folder.
-3.  **Initialize Git**:
-    ```bash
-    git init
-    ```
-4.  **Add Files**:
-    ```bash
-    git add .
-    ```
-5.  **Commit Changes**:
-    ```bash
-    git commit -m "Initial commit"
-    ```
-6.  **Add Remote**: Link your local repository to the GitHub repository you created. Replace `johnnyhawk02` with your GitHub username if different.
-    ```bash
-    git remote add origin https://github.com/johnnyhawk02/active-sefton-slip-printer.git
-    ```
-7.  **Push Code**:
-    ```bash
-    git branch -M main
-    git push -u origin main
-    ```
+### First Time Push
+1. Open your terminal in the project root directory.
+2. Check your git status and commit history:
+   ```bash
+   git status
+   git log --oneline
+   ```
+3. Set your GitHub repository as the remote origin (replace with your repository URL):
+   ```bash
+   git remote add origin https://github.com/<your-username>/active-sefton-slip-printer.git
+   ```
+4. Rename branch to `main` (if desired) and push:
+   ```bash
+   git branch -M main
+   git push -u origin main
+   ```
 
-## Future Updates
+---
 
-Whenever you make changes:
+## 2. Regular Update Workflow
 
-1.  `git add .`
-2.  `git commit -m "Description of changes"`
-3.  `git push`
+Whenever you modify templates in `app.js`, styles in `styles.css`, or layouts in `index.html`:
+
+```bash
+# 1. Check which files were changed
+git status
+
+# 2. Stage all modifications
+git add .
+
+# 3. Commit with a meaningful message
+git commit -m "Update prices: Youth category to 11-15yrs"
+
+# 4. Push to GitHub
+git push
+```
+
+---
+
+## 3. How Rollbacks Work
+
+Because Git tracks every commit in the workspace, you can safely revert changes if anything breaks:
+
+### Quick Rollback of Uncommitted Changes
+To discard all local edits and restore the last committed state:
+```bash
+git reset --hard HEAD
+```
+
+### Roll Back to Pre-Refactor State
+A complete snapshot of the original monolithic `index.html` is preserved as `index.html.bak` and committed in the Git history:
+```bash
+# Restore index.html from the backup file:
+cp index.html.bak index.html
+
+# Or checkout the initial commit:
+git checkout e54f765 -- index.html
+```
+
+### Inspecting History
+To view the full history of revisions:
+```bash
+git log --oneline -n 10
+```

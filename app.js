@@ -149,6 +149,11 @@ const TEMPLATES = {
         icon: ICONS.globe,
         label: "Pool & Class Times",
         content: `<div style="padding: 8px;"><div style="margin-bottom: 24px; text-align: center;"><p style="font-weight: 900; font-size: 24px; margin-bottom: 6px; line-height: 1.1; letter-spacing: -0.02em;">Meadows</p><p style="font-weight: 600; font-size: 16px; margin: 0;">Pool &amp; Class Times</p></div><img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://www.activeseftonfitness.co.uk/meadows-leisure-centre" style="width: 100px; height: 100px; display: block; margin: 0 auto;" alt="Pool & Class Times QR"></div>`
+    },
+    PhoneNumbers: {
+        icon: ICONS.phone,
+        label: "Phone Numbers",
+        content: `<p style="font-weight: 700; font-size: 24px; margin-bottom: 8px;">Phone Numbers</p><div style="border-top: 1px dashed #000; margin-bottom: 12px; width: 100%;"></div><table style="margin: 0 auto; border-collapse: collapse; font-size: 17px;"><tbody><tr><td style="padding: 6px 44px 6px 0; font-weight: 600; text-align: left; white-space: nowrap;">Upstairs office</td><td style="padding: 6px 0; font-weight: 700; font-size: 18px; text-align: left;">6719</td></tr><tr><td style="padding: 6px 44px 6px 0; font-weight: 600; text-align: left; white-space: nowrap;">DM Office</td><td style="padding: 6px 0; font-weight: 700; font-size: 18px; text-align: left;">6722</td></tr><tr><td style="padding: 6px 44px 6px 0; font-weight: 600; text-align: left; white-space: nowrap;">Library Office</td><td style="padding: 6px 0; font-weight: 700; font-size: 18px; text-align: left;">6724</td></tr><tr><td style="padding: 6px 44px 6px 0; font-weight: 600; text-align: left; white-space: nowrap;">GP (Martin)</td><td style="padding: 6px 0; font-weight: 700; font-size: 18px; text-align: left;">6736</td></tr><tr><td style="padding: 6px 44px 6px 0; font-weight: 600; text-align: left; white-space: nowrap;">GP (Lisa)</td><td style="padding: 6px 0; font-weight: 700; font-size: 18px; text-align: left;">6726</td></tr><tr><td style="padding: 6px 44px 6px 0; font-weight: 600; text-align: left; white-space: nowrap;">Fitness suite</td><td style="padding: 6px 0; font-weight: 700; font-size: 18px; text-align: left;">6734</td></tr><tr><td style="padding: 6px 44px 6px 0; font-weight: 600; text-align: left; white-space: nowrap;">Cristianos</td><td style="padding: 6px 0; font-weight: 700; font-size: 18px; text-align: left;">6735</td></tr><tr><td style="padding: 6px 44px 6px 0; font-weight: 600; text-align: left; white-space: nowrap;">Focus room 1</td><td style="padding: 6px 0; font-weight: 700; font-size: 18px; text-align: left;">8979</td></tr></tbody></table>`
     }
 };
 
@@ -157,7 +162,7 @@ const SIDEBAR_ITEMS = [
     'JoinOnlineMyFitApp', 'BecomeMember', 'PoolClassesQR', 'GymTimes', 'Rhymetime', 'FreeClassPass',
     'MembershipPrices', 'SmallPool', 'HolidayPoolTimes', 'AdultOnlySwims', 'OAPSwims', 'OutOfOrder',
     'WaterReception', 'MaleChange', 'FemaleChange', 'GroupChange', 'SaunaSteam', 'Retention',
-    'Aquatics', 'Printouts'
+    'Aquatics', 'Printouts', 'PhoneNumbers'
 ];
 
 const DEFAULT_FAVORITES = ['Aquatics', 'BecomeMember', 'OAPSwims', 'MembershipPrices', 'Retention', 'SmallPool'];
@@ -475,6 +480,14 @@ function handlePrint() {
                     white-space: nowrap;
                     margin-left: 8px !important;
                     text-align: right !important;
+                }
+                .slip-container table {
+                    margin: 0 auto !important;
+                    border-collapse: collapse !important;
+                }
+                .slip-container td {
+                    padding: 3px 4px;
+                    vertical-align: middle !important;
                 }
                 img { max-width: 100%; height: auto; display: block; margin: 8px auto; }
                 p { margin: 0; padding: 0; text-align: center; width: 100%; word-wrap: break-word; }

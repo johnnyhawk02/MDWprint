@@ -267,6 +267,16 @@ body {
     margin: 0;
 }
 
+.editor-content table {
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.editor-content td {
+    padding: 3px 4px;
+    vertical-align: middle;
+}
+
 .editor-content img {
     max-width: 100%;
     height: auto;

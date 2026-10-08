@@ -185,6 +185,15 @@ Every template in `content` must strictly adhere to `styleguide.md`:
 
 ---
 
+**Key:** PhoneNumbers  
+**Label:** Phone Numbers  
+**Category:** Contact / Directory  
+```html
+<p style="font-weight: 700; font-size: 24px; margin-bottom: 8px;">Phone Numbers</p><div style="border-top: 1px dashed #000; margin-bottom: 12px; width: 100%;"></div><table style="margin: 0 auto; border-collapse: collapse; font-size: 17px;"><tbody><tr><td style="padding: 6px 44px 6px 0; font-weight: 600; text-align: left; white-space: nowrap;">Upstairs office</td><td style="padding: 6px 0; font-weight: 700; font-size: 18px; text-align: left;">6719</td></tr><tr><td style="padding: 6px 44px 6px 0; font-weight: 600; text-align: left; white-space: nowrap;">DM Office</td><td style="padding: 6px 0; font-weight: 700; font-size: 18px; text-align: left;">6722</td></tr><tr><td style="padding: 6px 44px 6px 0; font-weight: 600; text-align: left; white-space: nowrap;">Library Office</td><td style="padding: 6px 0; font-weight: 700; font-size: 18px; text-align: left;">6724</td></tr><tr><td style="padding: 6px 44px 6px 0; font-weight: 600; text-align: left; white-space: nowrap;">GP (Martin)</td><td style="padding: 6px 0; font-weight: 700; font-size: 18px; text-align: left;">6736</td></tr><tr><td style="padding: 6px 44px 6px 0; font-weight: 600; text-align: left; white-space: nowrap;">GP (Lisa)</td><td style="padding: 6px 0; font-weight: 700; font-size: 18px; text-align: left;">6726</td></tr><tr><td style="padding: 6px 44px 6px 0; font-weight: 600; text-align: left; white-space: nowrap;">Fitness suite</td><td style="padding: 6px 0; font-weight: 700; font-size: 18px; text-align: left;">6734</td></tr><tr><td style="padding: 6px 44px 6px 0; font-weight: 600; text-align: left; white-space: nowrap;">Cristianos</td><td style="padding: 6px 0; font-weight: 700; font-size: 18px; text-align: left;">6735</td></tr><tr><td style="padding: 6px 44px 6px 0; font-weight: 600; text-align: left; white-space: nowrap;">Focus room 1</td><td style="padding: 6px 0; font-weight: 700; font-size: 18px; text-align: left;">8979</td></tr></tbody></table>
+```
+
+---
+
 **Key:** PoolClassesQR  
 **Label:** Pool & Class Times  
 **Category:** QR Schedule  
